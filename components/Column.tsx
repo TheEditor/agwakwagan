@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Droppable } from "@hello-pangea/dnd";
 import { ColumnWithCards } from "@/types/board";
 import { Card } from "./Card";
 
@@ -9,6 +10,7 @@ import { Card } from "./Card";
  *
  * Displays column title, cards, and an inline add card form.
  * Supports Enter to add, Escape to cancel.
+ * Cards can be dragged within or between columns.
  */
 interface ColumnProps {
   column: ColumnWithCards;
@@ -69,16 +71,36 @@ export function Column({ column, onAddCard }: ColumnProps) {
       </div>
 
       {/* Cards Container */}
-      <div className="space-y-2 min-h-[200px]">
-        {column.cards.length > 0 ? (
-          column.cards.map((card) => <Card key={card.id} card={card} />)
-        ) : (
-          <p className="text-sm text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]
-                        text-center py-8">
-            No cards yet
-          </p>
+      <Droppable droppableId={column.id}>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className={`space-y-2 min-h-[200px] rounded transition-colors duration-200 p-1
+                        ${
+                          snapshot.isDraggingOver
+                            ? "bg-blue-50 dark:bg-blue-900/20 ring-2 ring-blue-300 dark:ring-blue-700"
+                            : ""
+                        }`}
+          >
+            {column.cards.length > 0 ? (
+              column.cards.map((card, index) => (
+                <Card key={card.id} card={card} index={index} />
+              ))
+            ) : (
+              <p
+                className={`text-sm text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]
+                            text-center py-8 transition-opacity ${
+                              snapshot.isDraggingOver ? "opacity-50" : ""
+                            }`}
+              >
+                {snapshot.isDraggingOver ? "Drop card here" : "No cards yet"}
+              </p>
+            )}
+            {provided.placeholder}
+          </div>
         )}
-      </div>
+      </Droppable>
 
       {/* Add Card Form/Button */}
       <div className="mt-4 pt-4 border-t border-[var(--color-border-light)] dark:border-[var(--color-dark-border-light)]">

@@ -1,5 +1,6 @@
 "use client";
 
+import { Draggable } from "@hello-pangea/dnd";
 import { Card as CardType } from "@/types/board";
 
 /**
@@ -7,28 +8,39 @@ import { Card as CardType } from "@/types/board";
  *
  * Displays card title, description, and notes count with Ozhiaki theme styling.
  * Includes smooth hover states and transitions for better UX.
+ * Cards can be dragged to reorder within columns or move between columns.
  */
 interface CardProps {
   card: CardType;
-  index?: number;
+  index: number;
   onUpdate?: (cardId: string, updates: Partial<CardType>) => void;
   onDelete?: (cardId: string) => void;
 }
 
-export function Card({ card, index = 0, onUpdate, onDelete }: CardProps) {
+export function Card({ card, index, onUpdate, onDelete }: CardProps) {
   return (
-    <div
-      className="bg-white dark:bg-[var(--color-surface)]
-                 border border-[var(--color-border)] dark:border-[var(--color-dark-border)]
-                 rounded-lg p-3 mb-2
-                 shadow-sm hover:shadow-md
-                 transition-all duration-200
-                 cursor-pointer
-                 hover:border-[var(--color-primary)] dark:hover:border-[var(--color-primary)]
-                 hover:translate-y-[-2px]"
-      role="article"
-      aria-label={`Card: ${card.title}`}
-    >
+    <Draggable draggableId={card.id} index={index}>
+      {(provided, snapshot) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          className={`bg-white dark:bg-[var(--color-surface)]
+                     border border-[var(--color-border)] dark:border-[var(--color-dark-border)]
+                     rounded-lg p-3 mb-2
+                     shadow-sm hover:shadow-md
+                     transition-all duration-200
+                     cursor-grab active:cursor-grabbing
+                     hover:border-[var(--color-primary)] dark:hover:border-[var(--color-primary)]
+                     hover:translate-y-[-2px]
+                     ${
+                       snapshot.isDragging
+                         ? "opacity-50 rotate-2 shadow-2xl scale-105 bg-opacity-90"
+                         : ""
+                     }`}
+          role="article"
+          aria-label={`Card: ${card.title}`}
+        >
       {/* Card Title */}
       <h3 className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]
                      leading-snug break-words">
@@ -63,6 +75,8 @@ export function Card({ card, index = 0, onUpdate, onDelete }: CardProps) {
           Created {new Date(card.createdAt).toLocaleDateString()}
         </div>
       )}
-    </div>
+        </div>
+      )}
+    </Draggable>
   );
 }
