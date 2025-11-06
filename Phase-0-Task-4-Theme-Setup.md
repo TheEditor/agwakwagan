@@ -1,0 +1,264 @@
+# Phase 0 - Task 4: Ozhiaki Theme Setup
+
+**Task ID:** P0-T4  
+**Estimated Time:** 10 minutes  
+**Dependencies:** P0-T1 (Project initialized)
+
+---
+
+## Context
+
+Configure CSS variables for the Ozhiaki brand theme, supporting both light and dark modes. Ozhiaki uses CMU Maroon and Forest Green as primary/secondary colors with a professional, warm aesthetic.
+
+---
+
+## Objectives
+
+1. Update `app/globals.css` with CSS variables
+2. Define light theme colors
+3. Define dark theme colors
+4. Maintain Tailwind CSS integration
+
+---
+
+## Tasks
+
+### 4.1 Update `app/globals.css`
+
+**Replace the entire contents** of `app/globals.css` with:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   Ozhiaki Brand Theme Variables
+   ============================================ */
+
+:root {
+  /* === Ozhiaki Brand Colors === */
+  --color-primary: #6a0032;           /* CMU Maroon */
+  --color-primary-hover: #8b0041;     /* Lighter maroon for hovers */
+  --color-primary-light: #a8154b;     /* Even lighter for subtle elements */
+  
+  --color-secondary: #2d5016;         /* Forest Green */
+  --color-secondary-hover: #3a6b1c;   /* Lighter green for hovers */
+  --color-secondary-light: #4a7f28;   /* Even lighter for subtle elements */
+  
+  /* === Neutral Colors (Light Theme) === */
+  --color-bg: #ffffff;                /* Main background */
+  --color-surface: #f5f5f5;           /* Cards, panels, elevated surfaces */
+  --color-surface-hover: #ebebeb;     /* Surface hover state */
+  --color-border: #e0e0e0;            /* Borders, dividers */
+  --color-border-light: #f0f0f0;      /* Subtle borders */
+  
+  /* === Text Colors (Light Theme) === */
+  --color-text: #1a1a1a;              /* Primary text */
+  --color-text-secondary: #6b6b6b;    /* Secondary text, labels */
+  --color-text-tertiary: #9b9b9b;     /* Tertiary text, placeholders */
+  --color-text-inverted: #ffffff;     /* Text on dark backgrounds */
+  
+  /* === Status Colors === */
+  --color-success: #2d5016;           /* Success states (matches secondary) */
+  --color-success-light: #e8f5e9;     /* Success background */
+  --color-warning: #f59e0b;           /* Warning states */
+  --color-warning-light: #fef3c7;     /* Warning background */
+  --color-error: #dc2626;             /* Error states */
+  --color-error-light: #fee2e2;       /* Error background */
+  --color-info: #3b82f6;              /* Info states */
+  --color-info-light: #dbeafe;        /* Info background */
+  
+  /* === Interactive Elements === */
+  --color-focus: #6a0032;             /* Focus outline (matches primary) */
+  --color-disabled: #d1d1d1;          /* Disabled state */
+  --color-disabled-text: #a0a0a0;     /* Disabled text */
+  
+  /* === Shadows === */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* === Transitions === */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+  /* === Spacing === */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  
+  /* === Border Radius === */
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+}
+
+/* ============================================
+   Dark Theme Override
+   ============================================ */
+
+.dark {
+  /* === Ozhiaki Brand Colors (Dark) === */
+  --color-primary: #8b0041;           /* Lighter maroon for dark mode */
+  --color-primary-hover: #6a0032;     /* Darker maroon for hovers */
+  --color-primary-light: #a8154b;     
+  
+  --color-secondary: #3a6b1c;         /* Lighter green for dark mode */
+  --color-secondary-hover: #2d5016;   /* Darker green for hovers */
+  --color-secondary-light: #4a7f28;   
+  
+  /* === Neutral Colors (Dark Theme) === */
+  --color-bg: #1a1a1a;                /* Main background */
+  --color-surface: #2a2a2a;           /* Cards, panels, elevated surfaces */
+  --color-surface-hover: #333333;     /* Surface hover state */
+  --color-border: #404040;            /* Borders, dividers */
+  --color-border-light: #333333;      /* Subtle borders */
+  
+  /* === Text Colors (Dark Theme) === */
+  --color-text: #e5e5e5;              /* Primary text */
+  --color-text-secondary: #a0a0a0;    /* Secondary text, labels */
+  --color-text-tertiary: #6b6b6b;     /* Tertiary text, placeholders */
+  --color-text-inverted: #1a1a1a;     /* Text on light backgrounds */
+  
+  /* === Status Colors (Dark) === */
+  --color-success: #3a6b1c;           /* Success (adjusted for dark) */
+  --color-success-light: #1a2e0f;     /* Success background */
+  --color-warning: #f59e0b;           /* Warning (same) */
+  --color-warning-light: #2e1f05;     /* Warning background */
+  --color-error: #ef4444;             /* Error (brighter for dark) */
+  --color-error-light: #2e1111;       /* Error background */
+  --color-info: #3b82f6;              /* Info (same) */
+  --color-info-light: #11192e;        /* Info background */
+  
+  /* === Interactive Elements (Dark) === */
+  --color-focus: #8b0041;             /* Focus outline */
+  --color-disabled: #404040;          /* Disabled state */
+  --color-disabled-text: #6b6b6b;     /* Disabled text */
+  
+  /* === Shadows (Dark) === */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+               "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.transition-theme {
+  transition: background-color var(--transition-normal),
+              color var(--transition-normal),
+              border-color var(--transition-normal);
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+```
+
+---
+
+## Acceptance Criteria
+
+- [ ] `app/globals.css` updated with all CSS variables
+- [ ] Light theme colors defined
+- [ ] Dark theme colors defined
+- [ ] Ozhiaki brand colors (CMU Maroon, Forest Green) used
+- [ ] CSS compiles without errors
+- [ ] Tailwind directives included (@tailwind)
+- [ ] File formatted and readable
+
+---
+
+## Verification
+
+1. Start dev server: `npm run dev`
+2. Open browser to http://localhost:3000
+3. Open browser DevTools → Console
+4. Run: `getComputedStyle(document.documentElement).getPropertyValue('--color-primary')`
+5. Should output: `#6a0032` (CMU Maroon)
+
+Test dark mode:
+1. Add class `dark` to `<html>` tag temporarily
+2. Re-run: `getComputedStyle(document.documentElement).getPropertyValue('--color-primary')`
+3. Should output: `#8b0041` (lighter maroon for dark mode)
+
+---
+
+## Notes
+
+**Color Strategy:**
+- Primary (Maroon): Main actions, buttons, focus states
+- Secondary (Green): Success states, completion indicators
+- Neutrals: Backgrounds, surfaces, text hierarchy
+- Status: Success/warning/error/info with semantic meaning
+
+**Dark Mode:**
+- Inverted brightness (darker backgrounds, lighter text)
+- Adjusted brand colors (slightly lighter to maintain visibility)
+- Maintained contrast ratios for accessibility
+
+**CSS Variables:**
+- Can be used directly in CSS: `background: var(--color-primary);`
+- Can be used in Tailwind: `bg-[var(--color-primary)]`
+- Can be accessed in JS: `getComputedStyle(...).getPropertyValue('--color-primary')`
+
+---
+
+## Next Task
+
+After completion, proceed to **Phase-0-Task-5-Hook-Structure.md**
