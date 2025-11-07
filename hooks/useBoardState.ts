@@ -26,8 +26,13 @@ export function useBoardState(boardId: string = "board-default") {
   // Save board whenever it changes
   const saveBoardToStorage = useCallback(
     (newBoard: Board) => {
+      console.log("saveBoardToStorage called");
       setBoard(newBoard);
-      adapter.saveBoard(newBoard).catch((error) => {
+      // Defer save to next tick to avoid blocking render
+      Promise.resolve().then(() => {
+        console.log("Starting async save to storage");
+        return adapter.saveBoard(newBoard);
+      }).catch((error) => {
         console.error("Failed to save board:", error);
       });
     },

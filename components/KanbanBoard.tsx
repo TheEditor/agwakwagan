@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useBoard } from "@/hooks/useBoard";
 import { Column } from "./Column";
@@ -20,11 +21,14 @@ export function KanbanBoard() {
    * Validates drop destination and calls moveCard with the new position.
    * No-op if dropped outside valid area or in same position.
    */
-  const handleDragEnd = (result: DropResult) => {
+  const handleDragEnd = useCallback((result: DropResult) => {
     const { destination, source, draggableId } = result;
+
+    console.log("Drag ended:", { draggableId, source, destination });
 
     // Dropped outside valid area
     if (!destination) {
+      console.log("No destination, ignoring drop");
       return;
     }
 
@@ -33,18 +37,20 @@ export function KanbanBoard() {
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
+      console.log("Dropped in same position, ignoring");
       return;
     }
 
     // Move the card to the new location
+    console.log("Calling moveCard with:", draggableId, destination.droppableId, destination.index);
     moveCard(draggableId, destination.droppableId, destination.index);
-  };
+    console.log("moveCard completed");
+  }, [moveCard]);
 
   if (!isLoaded || !board) {
     return (
-      <div className="flex items-center justify-center h-screen bg-[var(--color-bg)]
-                      dark:bg-[var(--color-dark-bg)]">
-        <p className="text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)]">
+      <div className="flex items-center justify-center h-screen bg-[var(--color-bg)]">
+        <p className="text-[var(--color-text-secondary)]">
           Loading board...
         </p>
       </div>
@@ -56,16 +62,15 @@ export function KanbanBoard() {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-surface)]
-                      dark:from-[var(--color-dark-bg)] dark:to-[var(--color-dark-surface)]
                       p-6">
         {/* Header */}
         <header className="mb-8">
-          <h1 className="text-4xl font-bold text-[var(--color-text)] dark:text-[var(--color-dark-text)]
+          <h1 className="text-4xl font-bold text-[var(--color-text)]
                          mb-2">
             Agwakwagan
           </h1>
-          <p className="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)]">
-            Board ID: <code className="bg-[var(--color-surface)] dark:bg-[var(--color-dark-surface)]
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Board ID: <code className="bg-[var(--color-surface)]
                                  px-2 py-1 rounded text-xs font-mono">
               {board.id}
             </code>
@@ -84,7 +89,7 @@ export function KanbanBoard() {
             ))
           ) : (
             <div className="w-full flex items-center justify-center py-12">
-              <p className="text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]">
+              <p className="text-[var(--color-text-tertiary)]">
                 No columns found
               </p>
             </div>
@@ -92,9 +97,8 @@ export function KanbanBoard() {
         </div>
 
         {/* Summary */}
-        <footer className="text-xs text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]
-                           mt-8 pt-6 border-t border-[var(--color-border-light)]
-                           dark:border-[var(--color-dark-border-light)]">
+        <footer className="text-xs text-[var(--color-text-tertiary)]
+                           mt-8 pt-6 border-t border-[var(--color-border-light)]">
           Total cards: {Object.keys(board.cards).length}
         </footer>
       </div>
