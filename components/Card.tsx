@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Draggable } from "@hello-pangea/dnd";
 import { Card as CardType } from "@/types/board";
 
@@ -17,7 +18,7 @@ interface CardProps {
   onDelete?: (cardId: string) => void;
 }
 
-export function Card({ card, index, onUpdate, onDelete }: CardProps) {
+function CardComponent({ card, index, onUpdate, onDelete }: CardProps) {
   return (
     <Draggable draggableId={card.id} index={index}>
       {(provided, snapshot) => (
@@ -76,3 +77,10 @@ export function Card({ card, index, onUpdate, onDelete }: CardProps) {
     </Draggable>
   );
 }
+
+export const Card = memo(CardComponent, (prevProps, nextProps) => {
+  // Only re-render if card ID or index changed
+  // Ignore onUpdate/onDelete prop changes
+  return prevProps.card.id === nextProps.card.id &&
+         prevProps.index === nextProps.index;
+});
