@@ -54,18 +54,17 @@ export function Column({ column, onAddCard }: ColumnProps) {
   };
 
   return (
-    <div className="flex-shrink-0 w-80 bg-[var(--color-surface)] dark:bg-[var(--color-dark-surface)]
-                    rounded-lg p-4 shadow-sm border border-[var(--color-border-light)]
-                    dark:border-[var(--color-dark-border-light)]">
+    <div className="flex-shrink-0 w-80 bg-white
+                    rounded-xl p-4 shadow-lg border-2 border-[#d0d0d0]"
+         style={{ backgroundColor: "#fafafa" }}>
       {/* Column Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b-2 border-[var(--color-border)]">
+        <h2 className="text-lg font-bold text-[var(--color-primary)]">
           {column.title}
         </h2>
-        <span className="text-xs font-medium text-[var(--color-text-tertiary)]
-                         dark:text-[var(--color-dark-text-tertiary)]
-                         bg-[var(--color-bg)] dark:bg-[var(--color-dark-bg)]
-                         px-2 py-1 rounded">
+        <span className="text-sm font-bold text-white
+                         bg-[var(--color-primary)]
+                         px-2.5 py-1 rounded-full">
           {column.cards.length}
         </span>
       </div>
@@ -76,20 +75,20 @@ export function Column({ column, onAddCard }: ColumnProps) {
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`space-y-2 min-h-[200px] rounded transition-colors duration-200 p-1
+            className={`space-y-2 min-h-[300px] rounded transition-colors duration-200 p-2
                         ${
                           snapshot.isDraggingOver
-                            ? "bg-blue-50 dark:bg-blue-900/20 ring-2 ring-blue-300 dark:ring-blue-700"
-                            : ""
+                            ? "bg-blue-100 ring-2 ring-blue-400"
+                            : "bg-gray-50"
                         }`}
           >
             {column.cards.length > 0 ? (
-              column.cards.map((card, index) => (
-                <Card key={card.id} card={card} index={index} />
+              column.cards.map((card) => (
+                <Card key={card.id} card={card} index={card.order} />
               ))
             ) : (
               <p
-                className={`text-sm text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]
+                className={`text-sm text-[var(--color-text-tertiary)]
                             text-center py-8 transition-opacity ${
                               snapshot.isDraggingOver ? "opacity-50" : ""
                             }`}
@@ -103,14 +102,13 @@ export function Column({ column, onAddCard }: ColumnProps) {
       </Droppable>
 
       {/* Add Card Form/Button */}
-      <div className="mt-4 pt-4 border-t border-[var(--color-border-light)] dark:border-[var(--color-dark-border-light)]">
+      <div className="mt-4 pt-4 border-t border-[var(--color-border-light)]">
         {!isAdding ? (
           <button
             onClick={() => setIsAdding(true)}
-            className="w-full text-left text-sm font-medium text-[var(--color-text-secondary)]
-                       dark:text-[var(--color-dark-text-secondary)]
-                       hover:text-[var(--color-primary)] dark:hover:text-[var(--color-primary)]
-                       py-2 px-3 rounded hover:bg-[var(--color-bg)] dark:hover:bg-[var(--color-dark-bg)]
+            className="w-full text-left text-sm font-medium text-[var(--color-primary)]
+                       py-2 px-3 rounded bg-[var(--color-bg)]
+                       hover:bg-[var(--color-primary)] hover:text-white
                        transition-colors duration-200"
             aria-label={`Add card to ${column.title}`}
           >
@@ -125,12 +123,10 @@ export function Column({ column, onAddCard }: ColumnProps) {
               value={newCardTitle}
               onChange={(e) => setNewCardTitle(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full px-3 py-2 text-sm border border-[var(--color-primary)]
-                         dark:border-[var(--color-primary)]
-                         rounded bg-white dark:bg-[var(--color-dark-bg)]
-                         text-[var(--color-text)] dark:text-[var(--color-dark-text)]
+              className="w-full px-3 py-2 text-sm border-2 border-[var(--color-primary)]
+                         rounded bg-white
+                         text-[var(--color-text)]
                          placeholder-[var(--color-text-tertiary)]
-                         dark:placeholder-[var(--color-dark-text-tertiary)]
                          focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]
                          focus:ring-offset-0"
               aria-label="New card title"
@@ -155,14 +151,14 @@ export function Column({ column, onAddCard }: ColumnProps) {
                 }}
                 className="flex-1 text-xs font-medium px-3 py-2 rounded
                            border border-[var(--color-border)]
-                           text-[var(--color-text)] dark:text-[var(--color-dark-text)]
-                           hover:bg-[var(--color-bg)] dark:hover:bg-[var(--color-dark-bg)]
+                           text-[var(--color-text)]
+                           hover:bg-[var(--color-bg)]
                            transition-colors duration-200"
               >
                 Cancel
               </button>
             </div>
-            <p className="text-xs text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]
+            <p className="text-xs text-[var(--color-text-tertiary)]
                           text-center">
               Press Enter to add or Esc to cancel
             </p>

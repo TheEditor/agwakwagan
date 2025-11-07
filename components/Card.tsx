@@ -25,31 +25,28 @@ export function Card({ card, index, onUpdate, onDelete }: CardProps) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`bg-white dark:bg-[var(--color-surface)]
-                     border border-[var(--color-border)] dark:border-[var(--color-dark-border)]
+          className={`bg-white
+                     border border-[var(--color-border)]
                      rounded-lg p-3 mb-2
                      shadow-sm hover:shadow-md
-                     transition-all duration-200
                      cursor-grab active:cursor-grabbing
-                     hover:border-[var(--color-primary)] dark:hover:border-[var(--color-primary)]
-                     hover:translate-y-[-2px]
-                     ${
-                       snapshot.isDragging
-                         ? "opacity-50 rotate-2 shadow-2xl scale-105 bg-opacity-90"
-                         : ""
-                     }`}
+                     hover:border-[var(--color-primary)]
+                     hover:translate-y-[-2px]`}
           role="article"
           aria-label={`Card: ${card.title}`}
+          style={{
+            ...provided.draggableProps.style,
+          }}
         >
       {/* Card Title */}
-      <h3 className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]
+      <h3 className="text-sm font-medium text-[var(--color-text)]
                      leading-snug break-words">
         {card.title}
       </h3>
 
       {/* Card Description (if present) */}
       {card.description && (
-        <p className="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)]
+        <p className="text-xs text-[var(--color-text-secondary)]
                       mt-2 leading-relaxed break-words">
           {card.description}
         </p>
@@ -57,12 +54,11 @@ export function Card({ card, index, onUpdate, onDelete }: CardProps) {
 
       {/* Notes Count (if notes exist) */}
       {card.notes.length > 0 && (
-        <div className="flex items-center gap-1 mt-2 pt-2 border-t border-[var(--color-border-light)]
-                        dark:border-[var(--color-dark-border-light)]">
-          <span className="text-xs text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]">
+        <div className="flex items-center gap-1 mt-2 pt-2 border-t border-[var(--color-border-light)]">
+          <span className="text-xs text-[var(--color-text-tertiary)]">
             💬
           </span>
-          <span className="text-xs font-medium text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]">
+          <span className="text-xs font-medium text-[var(--color-text-tertiary)]">
             {card.notes.length} note{card.notes.length !== 1 ? "s" : ""}
           </span>
         </div>
@@ -70,8 +66,8 @@ export function Card({ card, index, onUpdate, onDelete }: CardProps) {
 
       {/* Card Metadata (if present) */}
       {card.createdAt && (
-        <div className="text-xs text-[var(--color-text-tertiary)] dark:text-[var(--color-dark-text-tertiary)]
-                        mt-2 pt-2 border-t border-[var(--color-border-light)] dark:border-[var(--color-dark-border-light)]">
+        <div className="text-xs text-[var(--color-text-tertiary)]
+                        mt-2 pt-2 border-t border-[var(--color-border-light)]">
           Created {new Date(card.createdAt).toLocaleDateString()}
         </div>
       )}
