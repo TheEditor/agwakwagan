@@ -102,37 +102,24 @@ export function useBoardActions(
    */
   const moveCard = useCallback(
     (cardId: string, toColumnId: string, newOrder: number) => {
-      console.log(`Moving card ${cardId} to column ${toColumnId}, position ${newOrder}`);
       setBoard((currentBoard) => {
         if (!currentBoard) {
-          console.error("Cannot move card: board not loaded");
           return currentBoard;
         }
 
         const card = currentBoard.cards[cardId];
-        if (!card) {
-          console.error(`Cannot move card: card ${cardId} not found`);
-          return currentBoard;
-        }
-
-        if (!currentBoard.columns[toColumnId]) {
-          console.error(
-            `Cannot move card: destination column ${toColumnId} does not exist`
-          );
+        if (!card || !currentBoard.columns[toColumnId]) {
           return currentBoard;
         }
 
         // If moving to same column and same position, no-op
         if (card.columnId === toColumnId && card.order === newOrder) {
-          console.log("Card already in target position, skipping");
           return currentBoard;
         }
 
-        console.log(`Card found: ${card.title}, moving from column ${card.columnId} to ${toColumnId}`);
-
         const updatedCards = { ...currentBoard.cards };
 
-        // Update the moved card first
+        // Simply update the moved card with its new position
         updatedCards[cardId] = {
           ...card,
           columnId: toColumnId,
@@ -140,41 +127,7 @@ export function useBoardActions(
           updatedAt: new Date(),
         };
 
-        // Get all cards in destination column and reorder them sequentially
-        const destCards = Object.values(updatedCards)
-          .filter((c) => c.columnId === toColumnId)
-          .sort((a, b) => a.order - b.order);
-
-        // Assign sequential order numbers to all destination column cards
-        destCards.forEach((c, index) => {
-          if (c.order !== index) {
-            updatedCards[c.id] = {
-              ...c,
-              order: index,
-              updatedAt: new Date(),
-            };
-          }
-        });
-
-        // If moving from a different column, reorder cards in source column
-        if (card.columnId !== toColumnId) {
-          const sourceCards = Object.values(updatedCards)
-            .filter((c) => c.columnId === card.columnId)
-            .sort((a, b) => a.order - b.order);
-
-          // Assign sequential order numbers to source column cards
-          sourceCards.forEach((c, index) => {
-            if (c.order !== index) {
-              updatedCards[c.id] = {
-                ...c,
-                order: index,
-                updatedAt: new Date(),
-              };
-            }
-          });
-        }
-
-        const result = {
+        return {
           ...currentBoard,
           cards: updatedCards,
           metadata: {
@@ -182,8 +135,6 @@ export function useBoardActions(
             updatedAt: new Date(),
           },
         };
-        console.log("Board state updated successfully");
-        return result;
       });
     },
     [setBoard]

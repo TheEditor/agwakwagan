@@ -24,11 +24,8 @@ export function KanbanBoard() {
   const handleDragEnd = useCallback((result: DropResult) => {
     const { destination, source, draggableId } = result;
 
-    console.log("Drag ended:", { draggableId, source, destination });
-
     // Dropped outside valid area
     if (!destination) {
-      console.log("No destination, ignoring drop");
       return;
     }
 
@@ -37,14 +34,11 @@ export function KanbanBoard() {
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
-      console.log("Dropped in same position, ignoring");
       return;
     }
 
     // Move the card to the new location
-    console.log("Calling moveCard with:", draggableId, destination.droppableId, destination.index);
     moveCard(draggableId, destination.droppableId, destination.index);
-    console.log("moveCard completed");
   }, [moveCard]);
 
   if (!isLoaded || !board) {
