@@ -11,7 +11,65 @@ import { Board } from "@/types/board";
 export const DEFAULT_BOARD: Board = {
   id: "board-default", // ⭐ CRITICAL: Required for Phase 7-8 agent integration
 
-  cards: {}, // Start with no cards
+  cards: {
+    "card-1": {
+      id: "card-1",
+      title: "Setup project repository",
+      description: "Initialize Git repo and set up development environment",
+      columnId: "col-done",
+      order: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      notes: [],
+    },
+    "card-2": {
+      id: "card-2",
+      title: "Design database schema",
+      description: "Plan entity relationships and create schema diagrams",
+      columnId: "col-progress",
+      order: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      notes: [],
+    },
+    "card-3": {
+      id: "card-3",
+      title: "Implement authentication",
+      columnId: "col-progress",
+      order: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      notes: [],
+    },
+    "card-4": {
+      id: "card-4",
+      title: "Create API endpoints",
+      description: "Build REST API with proper error handling",
+      columnId: "col-todo",
+      order: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      notes: [],
+    },
+    "card-5": {
+      id: "card-5",
+      title: "Write unit tests",
+      columnId: "col-todo",
+      order: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      notes: [],
+    },
+    "card-6": {
+      id: "card-6",
+      title: "Deploy to production",
+      columnId: "col-todo",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      notes: [],
+    },
+  },
 
   columns: {
     "col-todo": {

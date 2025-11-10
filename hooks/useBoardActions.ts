@@ -93,8 +93,8 @@ export function useBoardActions(
   /**
    * Move a card to a different column or position
    *
-   * Handles reordering within the destination column to maintain
-   * sequential order numbers. Updates only modified cards.
+   * Properly reorders cards in both source and destination columns.
+   * Maintains sequential order numbers (0, 1, 2...) for all cards.
    *
    * @param cardId - Card to move
    * @param toColumnId - Destination column ID
@@ -102,106 +102,96 @@ export function useBoardActions(
    */
   const moveCard = useCallback(
     (cardId: string, toColumnId: string, newOrder: number) => {
-      setBoard((currentBoard) => {
-        if (!currentBoard) {
-          return currentBoard;
-        }
+      if (!board) {
+        console.error("Cannot move card: board not loaded");
+        return;
+      }
 
-        const card = currentBoard.cards[cardId];
-        if (!card || !currentBoard.columns[toColumnId]) {
-          return currentBoard;
-        }
+      const card = board.cards[cardId];
+      if (!card) {
+        console.error(`Cannot move card: card ${cardId} not found`);
+        return;
+      }
 
-        // If moving to same column and same position, no-op
-        if (card.columnId === toColumnId && card.order === newOrder) {
-          return currentBoard;
-        }
+      if (!board.columns[toColumnId]) {
+        console.error(`Cannot move card: column ${toColumnId} not found`);
+        return;
+      }
 
-        const updatedCards = { ...currentBoard.cards };
+      const fromColumnId = card.columnId;
+      const fromOrder = card.order;
 
-        // Simply update the moved card with its new position
-        updatedCards[cardId] = {
-          ...card,
-          columnId: toColumnId,
-          order: newOrder,
-          updatedAt: new Date(),
-        };
+      // If moving to same column and same position, no-op
+      if (fromColumnId === toColumnId && fromOrder === newOrder) {
+        return;
+      }
 
-        return {
-          ...currentBoard,
-          cards: updatedCards,
-          metadata: {
-            ...currentBoard.metadata,
+      // Get all cards as array for easier manipulation
+      const allCards = Object.values(board.cards);
+      const updatedCards = { ...board.cards };
+
+      // Step 1: Remove card from source column (update order for cards after it)
+      if (fromColumnId === toColumnId) {
+        // Moving within same column
+        const columnCards = allCards
+          .filter((c) => c.columnId === toColumnId && c.id !== cardId)
+          .sort((a, b) => a.order - b.order);
+
+        // Insert the card at the new position
+        columnCards.splice(newOrder, 0, card);
+
+        // Update order for all cards in this column
+        columnCards.forEach((c, index) => {
+          updatedCards[c.id] = {
+            ...c,
+            order: index,
             updatedAt: new Date(),
-          },
-        };
-      });
-    },
-    [setBoard]
-  );
+          };
+        });
+      } else {
+        // Moving to different column
 
-  /**
-   * Update card properties
-   * Placeholder - will implement in Phase 3
-   */
-  const updateCard = useCallback(
-    (cardId: string, updates: Partial<Card>) => {
-      console.log("updateCard will be implemented in Phase 3");
-    },
-    [board, setBoard]
-  );
+        // Update source column: shift cards after the removed card
+        const sourceColumnCards = allCards
+          .filter((c) => c.columnId === fromColumnId && c.id !== cardId)
+          .sort((a, b) => a.order - b.order);
 
-  /**
-   * Delete a card
-   * Placeholder - will implement in Phase 3
-   */
-  const deleteCard = useCallback(
-    (cardId: string) => {
-      console.log("deleteCard will be implemented in Phase 3");
-    },
-    [board, setBoard]
-  );
+        sourceColumnCards.forEach((c, index) => {
+          updatedCards[c.id] = {
+            ...c,
+            order: index,
+            updatedAt: new Date(),
+          };
+        });
 
-  /**
-   * Add a note to a card
-   * Placeholder - will implement in Phase 3
-   */
-  const addNote = useCallback(
-    (cardId: string, noteText: string) => {
-      console.log("addNote will be implemented in Phase 3");
-    },
-    [board, setBoard]
-  );
+        // Update destination column: insert card at new position
+        const destColumnCards = allCards
+          .filter((c) => c.columnId === toColumnId)
+          .sort((a, b) => a.order - b.order);
 
-  /**
-   * Delete a note from a card
-   * Placeholder - will implement in Phase 3
-   */
-  const deleteNote = useCallback(
-    (cardId: string, noteId: string) => {
-      console.log("deleteNote will be implemented in Phase 3");
-    },
-    [board, setBoard]
-  );
+        destColumnCards.splice(newOrder, 0, card);
 
-  /**
-   * Add a new column
-   * Placeholder - will implement in Phase 3
-   */
-  const addColumn = useCallback(
-    (title: string) => {
-      console.log("addColumn will be implemented in Phase 3");
-    },
-    [board, setBoard]
-  );
+        destColumnCards.forEach((c, index) => {
+          updatedCards[c.id] = {
+            ...c,
+            columnId: toColumnId,
+            order: index,
+            updatedAt: new Date(),
+          };
+        });
+      }
 
-  /**
-   * Delete a column and all its cards
-   * Placeholder - will implement in Phase 3
-   */
-  const deleteColumn = useCallback(
-    (columnId: string) => {
-      console.log("deleteColumn will be implemented in Phase 3");
+      // Create updated board
+      const updatedBoard: Board = {
+        ...board,
+        cards: updatedCards,
+        metadata: {
+          ...board.metadata,
+          updatedAt: new Date(),
+        },
+      };
+
+      setBoard(updatedBoard);
     },
     [board, setBoard]
   );
@@ -209,11 +199,7 @@ export function useBoardActions(
   return {
     addCard,
     moveCard,
-    updateCard,
-    deleteCard,
-    addNote,
-    deleteNote,
-    addColumn,
-    deleteColumn,
+    // Phase 3+ functions will be added here as needed:
+    // updateCard, deleteCard, addNote, deleteNote, addColumn, deleteColumn
   };
 }

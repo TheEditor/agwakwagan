@@ -3,6 +3,9 @@
 import { useCallback } from "react";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useBoard } from "@/hooks/useBoard";
+import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
+import { exportBoard } from "@/utils/export";
+import { BoardHeader } from "./BoardHeader";
 import { Column } from "./Column";
 
 /**
@@ -12,7 +15,7 @@ import { Column } from "./Column";
  * renders columns with their cards, and handles drag & drop operations.
  */
 export function KanbanBoard() {
-  const { board, isLoaded, getAllColumnsWithCards, addCard, moveCard } =
+  const { board, isLoaded, getAllColumnsWithCards, addCard, moveCard, storageStatus } =
     useBoard();
 
   /**
@@ -41,6 +44,18 @@ export function KanbanBoard() {
     moveCard(draggableId, destination.droppableId, destination.index);
   }, [moveCard]);
 
+  /**
+   * Handle export triggered via keyboard shortcut or button
+   */
+  const handleExport = useCallback(() => {
+    if (board) {
+      exportBoard(board);
+    }
+  }, [board]);
+
+  // Set up keyboard shortcuts
+  useKeyboardShortcuts(handleExport);
+
   if (!isLoaded || !board) {
     return (
       <div className="flex items-center justify-center h-screen bg-[var(--color-bg)]">
@@ -54,25 +69,14 @@ export function KanbanBoard() {
   const columns = getAllColumnsWithCards;
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-surface)]
-                      p-6">
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold text-[var(--color-text)]
-                         mb-2">
-            Agwakwagan
-          </h1>
-          <p className="text-sm text-[var(--color-text-secondary)]">
-            Board ID: <code className="bg-[var(--color-surface)]
-                                 px-2 py-1 rounded text-xs font-mono">
-              {board.id}
-            </code>
-          </p>
-        </header>
+    <>
+      {board && <BoardHeader board={board} storageStatus={storageStatus} />}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <div className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-surface)]
+                        p-6">
 
-        {/* Board Columns */}
-        <div className="flex gap-6 overflow-x-auto pb-6">
+          {/* Board Columns */}
+          <div className="flex gap-6 overflow-x-auto pb-6">
           {columns.length > 0 ? (
             columns.map((column) => (
               <Column
@@ -95,7 +99,8 @@ export function KanbanBoard() {
                            mt-8 pt-6 border-t border-[var(--color-border-light)]">
           Total cards: {Object.keys(board.cards).length}
         </footer>
-      </div>
-    </DragDropContext>
+        </div>
+      </DragDropContext>
+    </>
   );
 }
