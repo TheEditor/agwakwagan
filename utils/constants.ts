@@ -96,6 +96,11 @@ export const DEFAULT_BOARD: Board = {
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+
+  // ⭐ NEW (Phase 3): Data source metadata
+  dataSourceId: "local-storage",
+  externalId: undefined,
+  lastSyncedAt: undefined,
 };
 
 /**

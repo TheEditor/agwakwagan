@@ -70,6 +70,28 @@ export interface Board {
   columns: Record<string, Column>; // Dictionary/map of columns by ID
   columnOrder: string[]; // Array of column IDs for render order
   metadata: BoardMetadata;
+
+  // ⭐ NEW (Phase 3): Data source and external system integration
+
+  /**
+   * Data source this board is stored in
+   * Enables multi-source board management
+   * Examples: "local-storage", "api-production", "beads-project-x"
+   */
+  dataSourceId?: string;
+
+  /**
+   * External system reference
+   * Used when board mirrors external data (e.g., Beads project, GitHub issues)
+   * Examples: Beads project ID, GitHub repo ID
+   */
+  externalId?: string;
+
+  /**
+   * Last sync timestamp (for external systems)
+   * Tracks when this board was last synchronized with external source
+   */
+  lastSyncedAt?: Date;
 }
 
 /**

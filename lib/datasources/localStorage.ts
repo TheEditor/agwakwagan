@@ -23,12 +23,17 @@ export class LocalStorageDataSource implements DataSource {
 
       if (!data) {
         // No saved board, return default with correct ID
-        return { ...DEFAULT_BOARD, id: boardId };
+        return { ...DEFAULT_BOARD, id: boardId, dataSourceId: this.id };
       }
 
       // Parse and hydrate dates
       const board = JSON.parse(data) as Board;
       this.hydrateDates(board);
+
+      // Ensure dataSourceId is set (migration for old boards)
+      if (!board.dataSourceId) {
+        board.dataSourceId = this.id;
+      }
 
       return board;
     } catch (error) {
