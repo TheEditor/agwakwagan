@@ -46,8 +46,8 @@ export function BoardHeader({ board, storageStatus, onImport }: BoardHeaderProps
 
     if (storageStatus.saving) {
       return (
-        <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
-          <span className="inline-block w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+        <div className="flex items-center gap-2 text-sm text-[var(--color-saving)]">
+          <span className="inline-block w-3 h-3 bg-[var(--color-saving)] rounded-full animate-pulse" />
           Saving...
         </div>
       );
@@ -55,7 +55,7 @@ export function BoardHeader({ board, storageStatus, onImport }: BoardHeaderProps
 
     if (storageStatus.error) {
       return (
-        <div className="flex items-center gap-2 text-sm text-red-600">
+        <div className="flex items-center gap-2 text-sm text-[var(--color-error)]">
           <span>✕</span>
           Save failed
         </div>
@@ -64,7 +64,7 @@ export function BoardHeader({ board, storageStatus, onImport }: BoardHeaderProps
 
     if (storageStatus.lastSaved) {
       return (
-        <div className="flex items-center gap-2 text-sm text-green-600">
+        <div className="flex items-center gap-2 text-sm text-[var(--color-saved)]">
           <span>✓</span>
           Saved {formatSaveTime(storageStatus.lastSaved)}
         </div>

@@ -30,14 +30,18 @@
   --color-text-inverted: #ffffff;     /* Text on dark backgrounds */
 
   /* === Status Colors === */
-  --color-success: #2d5016;           /* Success states (matches secondary) */
-  --color-success-light: #e8f5e9;     /* Success background */
-  --color-warning: #f59e0b;           /* Warning states */
+  --color-success: #15803d;           /* Success states - green */
+  --color-success-light: #dcfce7;     /* Success background */
+  --color-warning: #d97706;           /* Warning states - amber */
   --color-warning-light: #fef3c7;     /* Warning background */
-  --color-error: #dc2626;             /* Error states */
+  --color-error: #dc2626;             /* Error states - red */
   --color-error-light: #fee2e2;       /* Error background */
-  --color-info: #3b82f6;              /* Info states */
-  --color-info-light: #dbeafe;        /* Info background */
+  --color-info: #0369a1;              /* Info states - sky blue */
+  --color-info-light: #e0f2fe;        /* Info background */
+
+  /* === Saved Indicator Colors === */
+  --color-saved: #15803d;             /* Saved state - green */
+  --color-saving: #0369a1;            /* Saving state - blue */
 
   /* === Interactive Elements === */
   --color-focus: #6a0032;             /* Focus outline (matches primary) */
@@ -97,14 +101,18 @@
   --color-text-inverted: #1a1a1a;     /* Text on light backgrounds */
 
   /* === Status Colors (Dark) === */
-  --color-success: #3a6b1c;           /* Success (adjusted for dark) */
-  --color-success-light: #1a2e0f;     /* Success background */
-  --color-warning: #f59e0b;           /* Warning (same) */
-  --color-warning-light: #2e1f05;     /* Warning background */
-  --color-error: #ef4444;             /* Error (brighter for dark) */
-  --color-error-light: #2e1111;       /* Error background */
-  --color-info: #3b82f6;              /* Info (same) */
-  --color-info-light: #11192e;        /* Info background */
+  --color-success: #22c55e;           /* Success (brighter for dark) */
+  --color-success-light: #164e14;     /* Success background */
+  --color-warning: #f59e0b;           /* Warning (warm amber) */
+  --color-warning-light: #3a2a0f;     /* Warning background */
+  --color-error: #f87171;             /* Error (brighter for dark) */
+  --color-error-light: #4a1e1e;       /* Error background */
+  --color-info: #38bdf8;              /* Info (bright cyan) */
+  --color-info-light: #0e2842;        /* Info background */
+
+  /* === Saved Indicator Colors (Dark) === */
+  --color-saved: #22c55e;             /* Saved state - bright green */
+  --color-saving: #38bdf8;            /* Saving state - bright cyan */
 
   /* === Interactive Elements (Dark) === */
   --color-focus: #8b0041;             /* Focus outline */
