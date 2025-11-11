@@ -1,27 +1,38 @@
 "use client";
 
 import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Board } from "@/types/board";
+import { DataSource } from "@/types/datasource";
 import { StorageStatus } from "@/hooks/useBoardState";
 import { useToast } from "@/hooks/useToast";
+import { LocalStorageDataSource } from "@/lib/datasources/localStorage";
 import { exportBoard } from "@/utils/export";
+import { BoardSelector } from "./BoardSelector";
 import { ToastContainer } from "./ToastContainer";
 import { ThemeToggle } from "./ThemeToggle";
 
 /**
- * BoardHeader - Header with theme toggle, export, import, and save status
+ * BoardHeader - Header with board selector, theme toggle, export, and save status
  *
- * Displays board title and ID, provides export/import/theme buttons
- * with error handling and toast notifications. Shows auto-save status.
+ * Displays board selector, title, and action buttons with error handling
+ * and toast notifications. Shows auto-save status.
  */
 interface BoardHeaderProps {
   board: Board;
   storageStatus?: StorageStatus;
   onImport?: (board: Board) => void;
+  dataSource?: DataSource;
 }
 
-export function BoardHeader({ board, storageStatus, onImport }: BoardHeaderProps) {
+export function BoardHeader({
+  board,
+  storageStatus,
+  onImport,
+  dataSource = new LocalStorageDataSource(),
+}: BoardHeaderProps) {
+  const router = useRouter();
   const { toasts, removeToast, success, error } = useToast();
 
   /**
@@ -95,17 +106,54 @@ export function BoardHeader({ board, storageStatus, onImport }: BoardHeaderProps
     }
   }, [board, success, error]);
 
+  /**
+   * Handle board selection
+   * Updates URL to load the selected board
+   */
+  const handleSelectBoard = useCallback((boardId: string) => {
+    router.push(`/?board=${boardId}`);
+  }, [router]);
+
+  /**
+   * Handle creating a new board
+   */
+  const handleCreateBoard = useCallback(() => {
+    const newBoardId = prompt("Enter a name for the new board (e.g., 'football-schedule'):");
+    if (newBoardId && newBoardId.trim()) {
+      router.push(`/?board=${encodeURIComponent(newBoardId.trim())}`);
+    }
+  }, [router]);
+
+  /**
+   * Handle deleting a board
+   */
+  const handleDeleteBoard = useCallback((deletedBoardId: string) => {
+    if (deletedBoardId === board.id) {
+      // Current board was deleted, navigate to default
+      router.push("/");
+    }
+  }, [board.id, router]);
+
   return (
     <>
       <header className="bg-[var(--color-surface)] border-b border-[var(--color-border)] px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div>
+            {/* Board Selector */}
+            <BoardSelector
+              dataSource={dataSource}
+              currentBoardId={board.id}
+              onSelectBoard={handleSelectBoard}
+              onCreateBoard={handleCreateBoard}
+              onDeleteBoard={handleDeleteBoard}
+            />
+
+            <div className="hidden sm:block">
               <h1 className="text-2xl font-bold text-[var(--color-text)]">
                 Agwakwagan
               </h1>
               <p className="text-sm text-[var(--color-text-secondary)]">
-                {board.id}
+                {board.metadata.title || board.id}
               </p>
             </div>
 

@@ -2,21 +2,34 @@
 
 import { useCallback } from "react";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
+import { DataSource } from "@/types/datasource";
 import { useBoard } from "@/hooks/useBoard";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
+import { LocalStorageDataSource } from "@/lib/datasources/localStorage";
 import { exportBoard } from "@/utils/export";
 import { BoardHeader } from "./BoardHeader";
 import { Column } from "./Column";
+
+interface KanbanBoardProps {
+  boardId?: string;
+  dataSource?: DataSource;
+}
 
 /**
  * KanbanBoard - Root component for the kanban board
  *
  * Orchestrates the board layout, fetches data via useBoard,
  * renders columns with their cards, and handles drag & drop operations.
+ *
+ * @param boardId - Optional board ID for multi-board support (default: "board-default")
+ * @param dataSource - Optional DataSource implementation (default: LocalStorageDataSource)
  */
-export function KanbanBoard() {
+export function KanbanBoard({
+  boardId = "board-default",
+  dataSource = new LocalStorageDataSource(),
+}: KanbanBoardProps) {
   const { board, isLoaded, getAllColumnsWithCards, addCard, moveCard, storageStatus } =
-    useBoard();
+    useBoard(boardId);
 
   /**
    * Handle the end of a drag operation
@@ -70,7 +83,13 @@ export function KanbanBoard() {
 
   return (
     <>
-      {board && <BoardHeader board={board} storageStatus={storageStatus} />}
+      {board && (
+        <BoardHeader
+          board={board}
+          storageStatus={storageStatus}
+          dataSource={dataSource}
+        />
+      )}
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-surface)]
                         p-4 sm:p-6 lg:p-8">
