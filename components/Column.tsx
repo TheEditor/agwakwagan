@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Droppable } from "@hello-pangea/dnd";
+import { motion, AnimatePresence } from "framer-motion";
 import { ColumnWithCards } from "@/types/board";
 import { Card } from "./Card";
 
@@ -71,32 +72,48 @@ export function Column({ column, onAddCard }: ColumnProps) {
       {/* Cards Container */}
       <Droppable droppableId={column.id}>
         {(provided, snapshot) => (
-          <div
+          <motion.div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`space-y-3 min-h-[300px] rounded-md transition-colors duration-200 p-3
+            animate={{
+              backgroundColor: snapshot.isDraggingOver ? "rgb(239 246 255)" : "rgb(255 255 255)",
+              scale: snapshot.isDraggingOver ? 1.02 : 1,
+            }}
+            transition={{ duration: 0.2 }}
+            className={`space-y-3 min-h-[300px] rounded-md p-3
                         ${
                           snapshot.isDraggingOver
-                            ? "bg-blue-50 ring-2 ring-blue-400"
-                            : "bg-white"
+                            ? "ring-2 ring-blue-400"
+                            : ""
                         }`}
           >
-            {column.cards.length > 0 ? (
-              column.cards.map((card) => (
-                <Card key={card.id} card={card} index={card.order} />
-              ))
-            ) : (
-              <p
-                className={`text-sm text-[var(--color-text-tertiary)]
-                            text-center py-8 transition-opacity ${
-                              snapshot.isDraggingOver ? "opacity-50" : ""
-                            }`}
-              >
-                {snapshot.isDraggingOver ? "Drop card here" : "No cards yet"}
-              </p>
-            )}
+            <AnimatePresence initial={false}>
+              {column.cards.length > 0 ? (
+                column.cards.map((card) => (
+                  <motion.div
+                    key={card.id}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.2 }}
+                    layout="position"
+                  >
+                    <Card card={card} index={card.order} />
+                  </motion.div>
+                ))
+              ) : (
+                <p
+                  className={`text-sm text-[var(--color-text-tertiary)]
+                              text-center py-8 transition-opacity ${
+                                snapshot.isDraggingOver ? "opacity-50" : ""
+                              }`}
+                >
+                  {snapshot.isDraggingOver ? "Drop card here" : "No cards yet"}
+                </p>
+              )}
+            </AnimatePresence>
             {provided.placeholder}
-          </div>
+          </motion.div>
         )}
       </Droppable>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { Toast as ToastType } from "@/hooks/useToast";
 
 interface ToastProps {
@@ -31,10 +32,13 @@ export function Toast({ toast, onClose }: ToastProps) {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: 100 }}
+      transition={{ type: "spring", stiffness: 500, damping: 30 }}
       className={`${bgColors[toast.type]} text-white px-4 py-3 rounded shadow-lg
-                   flex items-center gap-2 min-w-[200px] max-w-[400px]
-                   animate-in slide-in-from-top-2 fade-in duration-300`}
+                   flex items-center gap-2 min-w-[200px] max-w-[400px]`}
     >
       <span className="font-bold text-lg">{icons[toast.type]}</span>
       <p className="flex-1 text-sm">{toast.message}</p>
@@ -44,6 +48,6 @@ export function Toast({ toast, onClose }: ToastProps) {
       >
         ×
       </button>
-    </div>
+    </motion.div>
   );
 }

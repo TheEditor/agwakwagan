@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
+import { motion } from "framer-motion";
 import { Board } from "@/types/board";
 import { StorageStatus } from "@/hooks/useBoardState";
 import { useToast } from "@/hooks/useToast";
@@ -47,7 +48,11 @@ export function BoardHeader({ board, storageStatus, onImport }: BoardHeaderProps
     if (storageStatus.saving) {
       return (
         <div className="flex items-center gap-2 text-sm text-[var(--color-saving)]">
-          <span className="inline-block w-3 h-3 bg-[var(--color-saving)] rounded-full animate-pulse" />
+          <motion.span
+            className="inline-block w-3 h-3 bg-[var(--color-saving)] rounded-full"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          />
           Saving...
         </div>
       );

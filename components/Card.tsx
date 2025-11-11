@@ -2,6 +2,7 @@
 
 import { memo } from "react";
 import { Draggable } from "@hello-pangea/dnd";
+import { motion } from "framer-motion";
 import { Card as CardType } from "@/types/board";
 
 /**
@@ -22,24 +23,28 @@ function CardComponent({ card, index, onUpdate, onDelete }: CardProps) {
   return (
     <Draggable draggableId={card.id} index={index}>
       {(provided, snapshot) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          className={`bg-white
-                     border border-gray-200
-                     rounded-md p-4
-                     shadow-sm hover:shadow-md
-                     cursor-grab active:cursor-grabbing
-                     hover:border-[var(--color-primary)]
-                     hover:translate-y-[-2px]
-                     transition-all duration-200`}
-          role="article"
-          aria-label={`Card: ${card.title}`}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ duration: 0.2 }}
           style={{
             ...provided.draggableProps.style,
           }}
         >
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            className={`bg-white
+                       border border-gray-200
+                       rounded-md p-4
+                       shadow-sm hover:shadow-md
+                       cursor-grab active:cursor-grabbing
+                       hover:border-[var(--color-primary)]
+                       transition-shadow duration-200`}
+            role="article"
+            aria-label={`Card: ${card.title}`}
+          >
       {/* Card Title */}
       <h3 className="text-sm font-semibold text-[var(--color-text)]
                      leading-snug break-words">
@@ -73,7 +78,8 @@ function CardComponent({ card, index, onUpdate, onDelete }: CardProps) {
           Created {new Date(card.createdAt).toLocaleDateString()}
         </div>
       )}
-        </div>
+          </div>
+        </motion.div>
       )}
     </Draggable>
   );
