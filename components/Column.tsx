@@ -54,7 +54,7 @@ export function Column({ column, onAddCard }: ColumnProps) {
   };
 
   return (
-    <div className="flex-shrink-0 w-80 bg-white
+    <div className="flex-shrink-0 min-w-[280px] max-w-[400px] flex-1 bg-white
                     rounded-xl p-4 shadow-lg border-2 border-[#d0d0d0]"
          style={{ backgroundColor: "#fafafa" }}>
       {/* Column Header */}
