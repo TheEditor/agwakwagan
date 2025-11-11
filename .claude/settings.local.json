@@ -11,7 +11,8 @@
       "Bash(bd dep help:*)",
       "Bash(bd dep add --help:*)",
       "Bash(bd update:*)",
-      "Bash(bd show:*)"
+      "Bash(bd show:*)",
+      "Bash(bd create:*)"
     ],
     "deny": [],
     "ask": []

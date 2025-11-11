@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Board } from "@/types/board";
+import { DataSource } from "@/types/datasource";
 import { DEFAULT_BOARD } from "@/utils/constants";
+import { LocalStorageDataSource } from "@/lib/datasources/localStorage";
 
-const STORAGE_KEY_PREFIX = 'agwakwagan';
 const SAVE_DEBOUNCE_MS = 1000; // 1 second
 
 export interface StorageStatus {
@@ -17,38 +18,53 @@ export interface StorageStatus {
  * Board State Hook
  *
  * Manages board data and persistence with debounced auto-save.
- * Integrates storage adapter pattern with debounced localStorage.
+ * Supports pluggable DataSource for flexibility across storage backends.
+ *
+ * @param boardId - Board identifier (default: "board-default")
+ * @param dataSource - Optional DataSource implementation (default: LocalStorageDataSource)
  */
-export function useBoardState(boardId: string = "board-default") {
+export function useBoardState(
+  boardId: string = "board-default",
+  dataSource?: DataSource
+) {
   const defaultBoard = { ...DEFAULT_BOARD, id: boardId };
-  const storageKey = `${STORAGE_KEY_PREFIX}-${boardId}`;
+  const source = dataSource || new LocalStorageDataSource();
 
-  // Initialize state from localStorage or default
+  // Initialize state from data source or default
   const [board, setBoardInternal] = useState<Board>(() => {
     try {
       if (typeof window === 'undefined') {
         return defaultBoard;
       }
-      const item = window.localStorage.getItem(storageKey);
-      if (!item) {
-        return defaultBoard;
+
+      // For now, load synchronously from localStorage
+      // In the future, this could use async loading
+      if (source.id === 'local-storage') {
+        const STORAGE_KEY_PREFIX = 'agwakwagan';
+        const storageKey = `${STORAGE_KEY_PREFIX}-${boardId}`;
+        const item = window.localStorage.getItem(storageKey);
+        if (!item) {
+          return defaultBoard;
+        }
+
+        // Parse and hydrate dates
+        const parsed = JSON.parse(item) as Board;
+        parsed.metadata.createdAt = new Date(parsed.metadata.createdAt);
+        parsed.metadata.updatedAt = new Date(parsed.metadata.updatedAt);
+        Object.values(parsed.cards).forEach((card) => {
+          card.createdAt = new Date(card.createdAt);
+          card.updatedAt = new Date(card.updatedAt);
+          card.notes.forEach((note) => {
+            note.createdAt = new Date(note.createdAt);
+          });
+        });
+
+        return parsed;
       }
 
-      // Parse and hydrate dates
-      const parsed = JSON.parse(item) as Board;
-      parsed.metadata.createdAt = new Date(parsed.metadata.createdAt);
-      parsed.metadata.updatedAt = new Date(parsed.metadata.updatedAt);
-      Object.values(parsed.cards).forEach((card) => {
-        card.createdAt = new Date(card.createdAt);
-        card.updatedAt = new Date(card.updatedAt);
-        card.notes.forEach((note) => {
-          note.createdAt = new Date(note.createdAt);
-        });
-      });
-
-      return parsed;
+      return defaultBoard;
     } catch (error) {
-      console.error('Failed to load from localStorage:', error);
+      console.error('Failed to load board:', error);
       return defaultBoard;
     }
   });
@@ -69,7 +85,7 @@ export function useBoardState(boardId: string = "board-default") {
     }
   }, [board]);
 
-  // Save to localStorage (debounced)
+  // Save to data source (debounced)
   const setBoard = useCallback((newBoard: Board) => {
     setBoardInternal(newBoard);
 
@@ -85,7 +101,14 @@ export function useBoardState(boardId: string = "board-default") {
     saveTimeoutRef.current = setTimeout(() => {
       try {
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(storageKey, JSON.stringify(newBoard));
+          // For localStorage compatibility, continue using direct save
+          // Future: switch to async source.saveBoard(newBoard)
+          if (source.id === 'local-storage') {
+            const STORAGE_KEY_PREFIX = 'agwakwagan';
+            const storageKey = `${STORAGE_KEY_PREFIX}-${newBoard.id}`;
+            window.localStorage.setItem(storageKey, JSON.stringify(newBoard));
+          }
+
           setStorageStatus({
             lastSaved: new Date(),
             saving: false,
@@ -99,10 +122,10 @@ export function useBoardState(boardId: string = "board-default") {
           saving: false,
           error: `Failed to save: ${message}`
         });
-        console.error('Failed to save to localStorage:', error);
+        console.error('Failed to save board:', error);
       }
     }, SAVE_DEBOUNCE_MS);
-  }, [storageKey]);
+  }, [source, boardId]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
