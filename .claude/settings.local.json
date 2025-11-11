@@ -9,7 +9,9 @@
       "Bash(npm run build:*)",
       "Bash(bd help:*)",
       "Bash(bd dep help:*)",
-      "Bash(bd dep add --help:*)"
+      "Bash(bd dep add --help:*)",
+      "Bash(bd update:*)",
+      "Bash(bd show:*)"
     ],
     "deny": [],
     "ask": []
