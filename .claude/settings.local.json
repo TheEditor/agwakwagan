@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git -C \"c:\\Users\\davef\\Documents\\Projects\\Claude\\Vibe Coding\\agwakwagan\\agwakwagan\" log --oneline -20)"
+      "Bash(git -C \"c:\\Users\\davef\\Documents\\Projects\\Claude\\Vibe Coding\\agwakwagan\\agwakwagan\" log --oneline -20)",
+      "Bash(bd onboard:*)",
+      "Bash(bd ready:*)",
+      "Bash(bd list:*)",
+      "Bash(bd close:*)",
+      "Bash(npm run build:*)",
+      "Bash(bd help:*)",
+      "Bash(bd dep help:*)",
+      "Bash(bd dep add --help:*)"
     ],
     "deny": [],
     "ask": []
