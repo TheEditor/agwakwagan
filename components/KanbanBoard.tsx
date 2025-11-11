@@ -73,10 +73,10 @@ export function KanbanBoard() {
       {board && <BoardHeader board={board} storageStatus={storageStatus} />}
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="min-h-screen bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-surface)]
-                        p-8">
+                        p-4 sm:p-6 lg:p-8">
 
           {/* Board Columns */}
-          <div className="flex gap-6 overflow-x-auto pb-8">
+          <div className="flex gap-4 sm:gap-5 lg:gap-6 overflow-x-auto pb-4 sm:pb-6 lg:pb-8">
           {columns.length > 0 ? (
             columns.map((column) => (
               <Column

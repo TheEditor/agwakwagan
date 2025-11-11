@@ -55,7 +55,7 @@ export function Column({ column, onAddCard }: ColumnProps) {
 
   return (
     <div className="flex-shrink-0 min-w-[280px] max-w-[400px] flex-1 bg-gray-50
-                    rounded-lg p-6 shadow-sm border border-gray-200">
+                    rounded-lg p-4 sm:p-5 lg:p-6 shadow-sm border border-gray-200">
       {/* Column Header */}
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
         <h2 className="text-lg font-bold text-[var(--color-primary)]">
