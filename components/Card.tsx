@@ -27,12 +27,13 @@ function CardComponent({ card, index, onUpdate, onDelete }: CardProps) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className={`bg-white
-                     border border-[var(--color-border)]
-                     rounded-lg p-3 mb-2
+                     border border-gray-200
+                     rounded-md p-4
                      shadow-sm hover:shadow-md
                      cursor-grab active:cursor-grabbing
                      hover:border-[var(--color-primary)]
-                     hover:translate-y-[-2px]`}
+                     hover:translate-y-[-2px]
+                     transition-all duration-200`}
           role="article"
           aria-label={`Card: ${card.title}`}
           style={{
@@ -40,7 +41,7 @@ function CardComponent({ card, index, onUpdate, onDelete }: CardProps) {
           }}
         >
       {/* Card Title */}
-      <h3 className="text-sm font-medium text-[var(--color-text)]
+      <h3 className="text-sm font-semibold text-[var(--color-text)]
                      leading-snug break-words">
         {card.title}
       </h3>
@@ -48,14 +49,14 @@ function CardComponent({ card, index, onUpdate, onDelete }: CardProps) {
       {/* Card Description (if present) */}
       {card.description && (
         <p className="text-xs text-[var(--color-text-secondary)]
-                      mt-2 leading-relaxed break-words">
+                      mt-3 leading-relaxed break-words">
           {card.description}
         </p>
       )}
 
       {/* Notes Count (if notes exist) */}
       {card.notes.length > 0 && (
-        <div className="flex items-center gap-1 mt-2 pt-2 border-t border-[var(--color-border-light)]">
+        <div className="flex items-center gap-1 mt-3 pt-3 border-t border-gray-200">
           <span className="text-xs text-[var(--color-text-tertiary)]">
             💬
           </span>
@@ -68,7 +69,7 @@ function CardComponent({ card, index, onUpdate, onDelete }: CardProps) {
       {/* Card Metadata (if present) */}
       {card.createdAt && (
         <div className="text-xs text-[var(--color-text-tertiary)]
-                        mt-2 pt-2 border-t border-[var(--color-border-light)]">
+                        mt-3 pt-3 border-t border-gray-200">
           Created {new Date(card.createdAt).toLocaleDateString()}
         </div>
       )}

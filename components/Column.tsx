@@ -54,11 +54,10 @@ export function Column({ column, onAddCard }: ColumnProps) {
   };
 
   return (
-    <div className="flex-shrink-0 min-w-[280px] max-w-[400px] flex-1 bg-white
-                    rounded-xl p-4 shadow-lg border-2 border-[#d0d0d0]"
-         style={{ backgroundColor: "#fafafa" }}>
+    <div className="flex-shrink-0 min-w-[280px] max-w-[400px] flex-1 bg-gray-50
+                    rounded-lg p-6 shadow-sm border border-gray-200">
       {/* Column Header */}
-      <div className="flex items-center justify-between mb-4 pb-3 border-b-2 border-[var(--color-border)]">
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
         <h2 className="text-lg font-bold text-[var(--color-primary)]">
           {column.title}
         </h2>
@@ -75,11 +74,11 @@ export function Column({ column, onAddCard }: ColumnProps) {
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`space-y-2 min-h-[300px] rounded transition-colors duration-200 p-2
+            className={`space-y-3 min-h-[300px] rounded-md transition-colors duration-200 p-3
                         ${
                           snapshot.isDraggingOver
-                            ? "bg-blue-100 ring-2 ring-blue-400"
-                            : "bg-gray-50"
+                            ? "bg-blue-50 ring-2 ring-blue-400"
+                            : "bg-white"
                         }`}
           >
             {column.cards.length > 0 ? (
@@ -102,12 +101,12 @@ export function Column({ column, onAddCard }: ColumnProps) {
       </Droppable>
 
       {/* Add Card Form/Button */}
-      <div className="mt-4 pt-4 border-t border-[var(--color-border-light)]">
+      <div className="mt-6 pt-4 border-t border-gray-200">
         {!isAdding ? (
           <button
             onClick={() => setIsAdding(true)}
             className="w-full text-left text-sm font-medium text-[var(--color-primary)]
-                       py-2 px-3 rounded bg-[var(--color-bg)]
+                       py-2 px-3 rounded-md bg-white
                        hover:bg-[var(--color-primary)] hover:text-white
                        transition-colors duration-200"
             aria-label={`Add card to ${column.title}`}
@@ -115,7 +114,7 @@ export function Column({ column, onAddCard }: ColumnProps) {
             + Add Card
           </button>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <input
               autoFocus
               type="text"
@@ -123,8 +122,8 @@ export function Column({ column, onAddCard }: ColumnProps) {
               value={newCardTitle}
               onChange={(e) => setNewCardTitle(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full px-3 py-2 text-sm border-2 border-[var(--color-primary)]
-                         rounded bg-white
+              className="w-full px-3 py-2 text-sm border border-[var(--color-primary)]
+                         rounded-md bg-white
                          text-[var(--color-text)]
                          placeholder-[var(--color-text-tertiary)]
                          focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]
@@ -135,7 +134,7 @@ export function Column({ column, onAddCard }: ColumnProps) {
               <button
                 onClick={handleAddCard}
                 disabled={!newCardTitle.trim()}
-                className="flex-1 text-xs font-medium px-3 py-2 rounded
+                className="flex-1 text-xs font-medium px-3 py-2 rounded-md
                            bg-[var(--color-primary)] text-white
                            hover:bg-[var(--color-primary-hover)]
                            disabled:bg-[var(--color-disabled)] disabled:text-[var(--color-disabled-text)]
@@ -149,10 +148,10 @@ export function Column({ column, onAddCard }: ColumnProps) {
                   setIsAdding(false);
                   setNewCardTitle("");
                 }}
-                className="flex-1 text-xs font-medium px-3 py-2 rounded
-                           border border-[var(--color-border)]
+                className="flex-1 text-xs font-medium px-3 py-2 rounded-md
+                           border border-gray-300
                            text-[var(--color-text)]
-                           hover:bg-[var(--color-bg)]
+                           hover:bg-gray-100
                            transition-colors duration-200"
               >
                 Cancel
