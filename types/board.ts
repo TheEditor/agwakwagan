@@ -14,6 +14,16 @@ export interface Card {
   updatedAt: Date;
   notes: Note[]; // List of notes/comments on this card
 
+  // ⭐ NEW (Phase 4): Kanban-assigned stable hash for external API reference
+  /**
+   * Stable hash identifier assigned by kanban on creation
+   * Used by external actors (Beads, CI/CD, agents) to reference this card
+   * Format: card-{xxxx} where xxxx is 4-char base36 (0-9, a-z)
+   * Generated once, never changes - allows external systems to store permanent references
+   * Example: card-a3f2, card-7b2k, card-9qq0
+   */
+  cardHash?: string;
+
   // ⭐ RESERVED FOR FUTURE AGENT INTEGRATION (Phase 8)
   // Do not use these field names for other purposes:
   //
@@ -43,6 +53,16 @@ export interface Column {
   order: number; // Position in board (0-indexed)
   color?: string; // Future: custom column colors
   cardLimit?: number; // Future: WIP (Work In Progress) limits
+
+  // ⭐ NEW (Phase 4): Kanban-assigned stable hash for external API reference
+  /**
+   * Stable hash identifier assigned by kanban on creation
+   * Used by external actors (Beads, CI/CD, agents) to reference this column
+   * Format: col-{xxxx} where xxxx is 4-char base36 (0-9, a-z)
+   * Generated once, never changes - allows external systems to store permanent references
+   * Example: col-x9k2, col-m4n7, col-iic8
+   */
+  columnHash?: string;
 }
 
 /**
