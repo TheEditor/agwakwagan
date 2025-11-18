@@ -295,11 +295,66 @@ export function useBoardActions(
     [board, setBoard]
   );
 
+  /**
+   * Update a column's title
+   *
+   * @param columnId - Column to update
+   * @param updates - Object with title to update
+   */
+  const updateColumn = useCallback(
+    (columnId: string, updates: Partial<Pick<Column, 'title'>>) => {
+      if (!board) {
+        console.error("Cannot update column: board not loaded");
+        return;
+      }
+
+      const column = board.columns[columnId];
+      if (!column) {
+        console.error(`Cannot update column: column ${columnId} not found`);
+        return;
+      }
+
+      // Validate title if provided
+      if (updates.title !== undefined) {
+        const trimmedTitle = updates.title.trim();
+        if (!trimmedTitle) {
+          console.error("Cannot update column: title cannot be empty");
+          return;
+        }
+        if (trimmedTitle.length > 100) {
+          console.error("Cannot update column: title exceeds 100 characters");
+          return;
+        }
+      }
+
+      const updatedColumns = {
+        ...board.columns,
+        [columnId]: {
+          ...column,
+          ...(updates.title !== undefined && { title: updates.title.trim() }),
+        },
+      };
+
+      const updatedBoard: Board = {
+        ...board,
+        columns: updatedColumns,
+        metadata: {
+          ...board.metadata,
+          updatedAt: new Date(),
+        },
+      };
+
+      setBoard(updatedBoard);
+    },
+    [board, setBoard]
+  );
+
   return {
     addCard,
     moveCard,
     updateCard,
     deleteCard,
+    updateColumn,
     // Phase 3+ functions will be added here as needed:
     // addNote, deleteNote, addColumn, deleteColumn
   };

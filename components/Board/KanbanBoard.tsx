@@ -136,7 +136,7 @@ interface KanbanBoardProps {
 }
 
 export function KanbanBoard({ boardId }: KanbanBoardProps) {
-  const { board, isLoaded, moveCard, addCard, updateCard, deleteCard } = useBoard(boardId);
+  const { board, isLoaded, moveCard, addCard, updateCard, deleteCard, updateColumn } = useBoard(boardId);
   const {
     dragState,
     handleDragStart,
@@ -264,6 +264,7 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
                 }}
                 onUpdateCard={updateCard}
                 onCancelEditCard={() => setEditingCardId(null)}
+                onUpdateColumn={updateColumn}
               />
             );
           })}

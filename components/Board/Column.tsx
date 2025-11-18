@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Column as ColumnType, Card as CardType } from '@/types/board';
 import { Card } from './Card';
@@ -135,6 +135,34 @@ const DropIndicator = styled.div<{ isActive: boolean }>`
   opacity: ${props => props.isActive ? 0.8 : 0};
 `;
 
+const ColumnTitleInput = styled.input`
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 2px solid var(--maroon);
+  border-radius: 4px;
+  padding: 4px 8px;
+  width: 100%;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(109, 46, 66, 0.1);
+  }
+`;
+
+const ColumnTitleDisplay = styled.span`
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s var(--ease-out);
+
+  &:hover {
+    background: rgba(109, 46, 66, 0.05);
+  }
+`;
+
 interface ColumnProps {
   column: ColumnType;
   cards: CardType[];
@@ -154,6 +182,7 @@ interface ColumnProps {
   onDeleteCard?: (cardId: string) => void;
   onUpdateCard?: (cardId: string, updates: Partial<Pick<CardType, 'title' | 'description'>>) => void;
   onCancelEditCard?: () => void;
+  onUpdateColumn?: (columnId: string, updates: Partial<Pick<ColumnType, 'title'>>) => void;
 }
 
 export function Column({
@@ -175,7 +204,45 @@ export function Column({
   onDeleteCard,
   onUpdateCard,
   onCancelEditCard,
+  onUpdateColumn,
 }: ColumnProps) {
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [editTitle, setEditTitle] = useState(column.title);
+  const titleInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isEditingTitle) {
+      titleInputRef.current?.focus();
+      titleInputRef.current?.select();
+    }
+  }, [isEditingTitle]);
+
+  const handleStartEdit = () => {
+    setEditTitle(column.title);
+    setIsEditingTitle(true);
+  };
+
+  const handleSaveEdit = () => {
+    const trimmed = editTitle.trim();
+    if (trimmed && trimmed !== column.title && trimmed.length <= 100) {
+      onUpdateColumn?.(column.id, { title: trimmed });
+    }
+    setIsEditingTitle(false);
+  };
+
+  const handleCancelEdit = () => {
+    setEditTitle(column.title);
+    setIsEditingTitle(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSaveEdit();
+    } else if (e.key === 'Escape') {
+      handleCancelEdit();
+    }
+  };
+
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     onDragOver(e);
@@ -204,10 +271,25 @@ export function Column({
     >
       <ColumnHeader>
         <h2>
-          <span className="column-title">
-            {column.title}
-            <span className="card-count">{cards.length}</span>
-          </span>
+          {isEditingTitle ? (
+            <ColumnTitleInput
+              ref={titleInputRef}
+              type="text"
+              value={editTitle}
+              onChange={(e) => setEditTitle(e.target.value)}
+              onBlur={handleSaveEdit}
+              onKeyDown={handleKeyDown}
+              maxLength={100}
+              aria-label="Edit column title"
+            />
+          ) : (
+            <span className="column-title">
+              <ColumnTitleDisplay onClick={handleStartEdit} title="Click to edit column name">
+                {column.title}
+              </ColumnTitleDisplay>
+              <span className="card-count">{cards.length}</span>
+            </span>
+          )}
         </h2>
       </ColumnHeader>
 
