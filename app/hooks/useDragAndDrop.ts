@@ -3,6 +3,7 @@ import { useState, useCallback, useRef } from 'react';
 interface DragState {
   draggedCardId: string | null;
   draggedFromColumn: string | null;
+  draggedCardOriginalIndex: number | null;
   dragOverColumn: string | null;
   dragOverIndex: number | null;
   dropIndicatorIndex: number | null;
@@ -14,6 +15,7 @@ export function useDragAndDrop(
   const [dragState, setDragState] = useState<DragState>({
     draggedCardId: null,
     draggedFromColumn: null,
+    draggedCardOriginalIndex: null,
     dragOverColumn: null,
     dragOverIndex: null,
     dropIndicatorIndex: null,
@@ -22,7 +24,7 @@ export function useDragAndDrop(
   const dragImageRef = useRef<HTMLDivElement | null>(null);
   const lastDragOverTime = useRef<number>(0);
 
-  const handleDragStart = useCallback((e: React.DragEvent, cardId: string, columnId: string) => {
+  const handleDragStart = useCallback((e: React.DragEvent, cardId: string, columnId: string, cardIndex: number) => {
     // Set drag data
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('cardId', cardId);
@@ -52,6 +54,7 @@ export function useDragAndDrop(
     setDragState({
       draggedCardId: cardId,
       draggedFromColumn: columnId,
+      draggedCardOriginalIndex: cardIndex,
       dragOverColumn: null,
       dragOverIndex: null,
       dropIndicatorIndex: null,
@@ -130,10 +133,20 @@ export function useDragAndDrop(
 
       const dropIndex = dragState.dropIndicatorIndex ?? 0;
 
-      // Don't do anything if dropping in same position
-      if (sourceColumn === columnId && dragState.dragOverIndex === dropIndex) {
-        handleDragEnd();
-        return;
+      // For same-column moves, we need to check if the card actually moved
+      // Don't just compare indices - check if a reorder is needed
+      if (sourceColumn === columnId) {
+        // Get the original card position
+        const originalIndex = dragState.draggedCardOriginalIndex;
+
+        // Adjust drop index if dropping after original position
+        const adjustedDropIndex = dropIndex > (originalIndex ?? 0) ? dropIndex - 1 : dropIndex;
+
+        // Only skip if truly same position
+        if (originalIndex === adjustedDropIndex) {
+          handleDragEnd();
+          return;
+        }
       }
 
       // Execute the move
@@ -142,7 +155,7 @@ export function useDragAndDrop(
       // Reset state
       handleDragEnd();
     },
-    [dragState.dropIndicatorIndex, dragState.dragOverIndex, onCardMove]
+    [dragState.dropIndicatorIndex, dragState.draggedCardOriginalIndex, onCardMove]
   );
 
   const handleDragEnd = useCallback(() => {
@@ -155,6 +168,7 @@ export function useDragAndDrop(
     setDragState({
       draggedCardId: null,
       draggedFromColumn: null,
+      draggedCardOriginalIndex: null,
       dragOverColumn: null,
       dragOverIndex: null,
       dropIndicatorIndex: null,
