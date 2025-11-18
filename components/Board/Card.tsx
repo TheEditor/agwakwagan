@@ -165,7 +165,7 @@ const CardActions = styled.div`
 
 interface CardProps {
   card: CardType;
-  onDragStart: () => void;
+  onDragStart: (e: React.DragEvent) => void;
   onDragEnd: () => void;
 }
 
@@ -216,7 +216,7 @@ export function Card({ card, onDragStart, onDragEnd }: CardProps) {
     }, 0);
 
     setIsDragging(true);
-    onDragStart();
+    onDragStart(e);
   };
 
   const handleDragEnd = () => {

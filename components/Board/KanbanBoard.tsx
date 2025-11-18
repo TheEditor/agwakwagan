@@ -205,8 +205,8 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
                 onDragEnter={(e) => handleDragEnter(e, columnId)}
                 onDragOver={(e) => handleDragOver(e, columnId, cards.length)}
                 onDrop={(e) => handleDrop(e, columnId)}
-                onCardDragStart={(cardId) =>
-                  handleDragStart({} as React.DragEvent, cardId, columnId)
+                onCardDragStart={(cardId, e) =>
+                  handleDragStart(e, cardId, columnId)
                 }
                 onCardDragEnd={handleDragEnd}
                 onAddCard={(title, description) => {

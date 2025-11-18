@@ -143,7 +143,7 @@ interface ColumnProps {
   onDragEnter: (e: React.DragEvent) => void;
   onDragOver: (e: React.DragEvent) => void;
   onDrop: (e: React.DragEvent) => void;
-  onCardDragStart: (cardId: string) => void;
+  onCardDragStart: (cardId: string, e: React.DragEvent) => void;
   onCardDragEnd: () => void;
   onAddCard: (title: string, description?: string) => void;
   onStartAddCard: () => void;
@@ -208,7 +208,7 @@ export function Column({
           <React.Fragment key={card.id}>
             <Card
               card={card}
-              onDragStart={() => onCardDragStart(card.id)}
+              onDragStart={(e) => onCardDragStart(card.id, e)}
               onDragEnd={onCardDragEnd}
             />
             {dropIndicatorIndex === index + 1 && (
