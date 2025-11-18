@@ -1,3 +1,9 @@
+/* ============================================
+   Google Fonts Import
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Fira+Code:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,27 +13,55 @@
    ============================================ */
 
 :root {
-  /* === Ozhiaki Brand Colors === */
-  --color-primary: #6a0032;           /* CMU Maroon */
-  --color-primary-hover: #8b0041;     /* Lighter maroon for hovers */
+  /* === Ozhiaki Brand Colors (Exact Spec) === */
+  --maroon: #6D2E42;                  /* Primary brand */
+  --forest: #0A3622;                  /* Secondary brand */
+  --earth: #3E2723;                   /* Dark UI elements */
+  --cedar: #8B3A3A;                   /* Warnings, active states */
+  --sky: #4A6FA5;                     /* Info states */
+  --sage: #7A8B7F;                    /* Muted backgrounds */
+  --birch: #F5E6D3;                   /* Light backgrounds */
+  --snow: #FAFAFA;                    /* Pure white alternative */
+
+  /* === Legacy Color Variables (for compatibility) === */
+  --color-primary: #6D2E42;           /* CMU Maroon (updated to spec) */
+  --color-primary-hover: #8B3A3A;     /* Cedar for hovers */
   --color-primary-light: #a8154b;     /* Even lighter for subtle elements */
 
-  --color-secondary: #2d5016;         /* Forest Green */
+  --color-secondary: #0A3622;         /* Forest Green (updated to spec) */
   --color-secondary-hover: #3a6b1c;   /* Lighter green for hovers */
   --color-secondary-light: #4a7f28;   /* Even lighter for subtle elements */
 
-  /* === Neutral Colors (Light Theme) === */
+  /* === Functional Colors (Light Theme) === */
+  --bg-primary: #FAFAFA;              /* Main background */
+  --bg-secondary: #F5E6D3;            /* Birch - secondary background */
+  --bg-card: #FFFFFF;                 /* Card backgrounds */
+  --bg-hover: rgba(245, 230, 211, 0.5); /* Hover state */
+
+  --text-primary: #1A1A1A;            /* Primary text */
+  --text-secondary: #4A4A4A;          /* Secondary text */
+  --text-muted: #787878;              /* Muted text */
+
+  --border-default: #E8E8E8;          /* Default borders */
+  --border-focus: #6D2E42;            /* Focus borders (maroon) */
+
+  /* === Legacy Neutral Colors (Light Theme) === */
   --color-bg: #ffffff;                /* Main background */
   --color-surface: #f5f5f5;           /* Cards, panels, elevated surfaces */
   --color-surface-hover: #ebebeb;     /* Surface hover state */
   --color-border: #e0e0e0;            /* Borders, dividers */
   --color-border-light: #f0f0f0;      /* Subtle borders */
 
-  /* === Text Colors (Light Theme) === */
+  /* === Legacy Text Colors (Light Theme) === */
   --color-text: #1a1a1a;              /* Primary text */
   --color-text-secondary: #6b6b6b;    /* Secondary text, labels */
   --color-text-tertiary: #9b9b9b;     /* Tertiary text, placeholders */
   --color-text-inverted: #ffffff;     /* Text on dark backgrounds */
+
+  /* === Typography === */
+  --font-display: 'Crimson Pro', 'Iowan Old Style', 'Palatino', serif;
+  --font-body: 'Fira Code', 'Cascadia Code', 'SF Mono', monospace;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* === Status Colors === */
   --color-success: #15803d;           /* Success states - green */
@@ -48,18 +82,37 @@
   --color-disabled: #d1d1d1;          /* Disabled state */
   --color-disabled-text: #a0a0a0;     /* Disabled text */
 
-  /* === Shadows === */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  /* === Shadows (Layered Depth) === */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+  /* === Animation === */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* === Transitions === */
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
   --transition-slow: 350ms ease;
 
-  /* === Spacing === */
+  /* === Spacing (8px Base Unit) === */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 2.5rem;   /* 40px */
+  --space-6: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */
+  --space-10: 5rem;    /* 80px */
+  --space-12: 6rem;    /* 96px */
+  --space-16: 8rem;    /* 128px */
+
+  /* === Legacy Spacing === */
   --spacing-xs: 0.25rem;   /* 4px */
   --spacing-sm: 0.5rem;    /* 8px */
   --spacing-md: 1rem;      /* 16px */
@@ -74,27 +127,57 @@
 }
 
 /* ============================================
-   Dark Theme Override
+   Dark Theme Override (prefers-color-scheme)
    ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* === Functional Colors (Dark Theme) === */
+    --bg-primary: #1A1A1A;              /* Main background */
+    --bg-secondary: #2D2D2D;            /* Dark secondary */
+    --bg-card: #2D2D2D;                 /* Card backgrounds */
+    --bg-hover: rgba(62, 39, 35, 0.5);  /* Hover state */
+
+    --text-primary: #FAFAFA;            /* Primary text */
+    --text-secondary: #E8E8E8;          /* Secondary text */
+    --text-muted: #787878;              /* Muted text */
+
+    --border-default: #4A4A4A;          /* Dark borders */
+    --border-focus: #8B3A3A;            /* Cedar for focus */
+  }
+}
 
 .dark {
   /* === Ozhiaki Brand Colors (Dark) === */
-  --color-primary: #8b0041;           /* Lighter maroon for dark mode */
-  --color-primary-hover: #6a0032;     /* Darker maroon for hovers */
+  --color-primary: #8b3a3a;           /* Cedar for dark mode */
+  --color-primary-hover: #6D2E42;     /* Maroon for hovers */
   --color-primary-light: #a8154b;
 
   --color-secondary: #3a6b1c;         /* Lighter green for dark mode */
-  --color-secondary-hover: #2d5016;   /* Darker green for hovers */
+  --color-secondary-hover: #0A3622;   /* Darker green for hovers */
   --color-secondary-light: #4a7f28;
 
-  /* === Neutral Colors (Dark Theme) === */
+  /* === Functional Colors (Dark Theme) === */
+  --bg-primary: #1A1A1A;              /* Main background */
+  --bg-secondary: #2D2D2D;            /* Dark secondary */
+  --bg-card: #2D2D2D;                 /* Card backgrounds */
+  --bg-hover: rgba(62, 39, 35, 0.5);  /* Hover state */
+
+  --text-primary: #FAFAFA;            /* Primary text */
+  --text-secondary: #E8E8E8;          /* Secondary text */
+  --text-muted: #787878;              /* Muted text */
+
+  --border-default: #4A4A4A;          /* Dark borders */
+  --border-focus: #8B3A3A;            /* Cedar for focus */
+
+  /* === Legacy Neutral Colors (Dark Theme) === */
   --color-bg: #1a1a1a;                /* Main background */
   --color-surface: #2a2a2a;           /* Cards, panels, elevated surfaces */
   --color-surface-hover: #333333;     /* Surface hover state */
   --color-border: #404040;            /* Borders, dividers */
   --color-border-light: #333333;      /* Subtle borders */
 
-  /* === Text Colors (Dark Theme) === */
+  /* === Legacy Text Colors (Dark Theme) === */
   --color-text: #e5e5e5;              /* Primary text */
   --color-text-secondary: #a0a0a0;    /* Secondary text, labels */
   --color-text-tertiary: #6b6b6b;     /* Tertiary text, placeholders */
@@ -153,8 +236,7 @@ body {
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -17,6 +17,8 @@
   "author": "Agwakwagan Team",
   "license": "MIT",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@hello-pangea/dnd": "^18.0.1",
     "@tailwindcss/postcss": "^4.1.16",
     "@types/node": "^24.10.0",
