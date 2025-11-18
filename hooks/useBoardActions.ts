@@ -134,11 +134,18 @@ export function useBoardActions(
       if (fromColumnId === toColumnId) {
         // Moving within same column
         const columnCards = allCards
-          .filter((c) => c.columnId === toColumnId && c.id !== cardId)
+          .filter((c) => c.columnId === toColumnId)
           .sort((a, b) => a.order - b.order);
 
+        // Remove card from its current position
+        const cardIndex = columnCards.findIndex((c) => c.id === cardId);
+        columnCards.splice(cardIndex, 1);
+
+        // Clamp newOrder to valid range
+        const clampedOrder = Math.max(0, Math.min(newOrder, columnCards.length));
+
         // Insert the card at the new position
-        columnCards.splice(newOrder, 0, card);
+        columnCards.splice(clampedOrder, 0, card);
 
         // Update order for all cards in this column
         columnCards.forEach((c, index) => {
