@@ -35,6 +35,21 @@ const ColumnContainer = styled.div<{ isDragOver: boolean }>`
       transform: translateY(0);
     }
   }
+
+  &:hover {
+    .column-actions {
+      opacity: 1;
+    }
+  }
+
+  &:focus {
+    outline: 2px solid var(--maroon);
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
 `;
 
 const ColumnHeader = styled.div`
@@ -153,13 +168,40 @@ const ColumnTitleInput = styled.input`
 `;
 
 const ColumnTitleDisplay = styled.span`
-  cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
   transition: background 0.2s var(--ease-out);
+`;
 
-  &:hover {
-    background: rgba(109, 46, 66, 0.05);
+const ColumnActions = styled.div`
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-out);
+
+  button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s var(--ease-out);
+    padding: 0;
+
+    &:hover {
+      background: var(--maroon);
+      color: white;
+    }
+  }
+
+  @media (hover: none) {
+    opacity: 1;
   }
 `;
 
@@ -208,6 +250,7 @@ export function Column({
 }: ColumnProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editTitle, setEditTitle] = useState(column.title);
+  const [isHovered, setIsHovered] = useState(false);
   const titleInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -216,6 +259,19 @@ export function Column({
       titleInputRef.current?.select();
     }
   }, [isEditingTitle]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only respond to F2 when this column is hovered/focused and not already editing
+      if (e.key === 'F2' && isHovered && !isEditingTitle) {
+        e.preventDefault();
+        handleStartEdit();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isHovered, isEditingTitle]);
 
   const handleStartEdit = () => {
     setEditTitle(column.title);
@@ -259,6 +315,16 @@ export function Column({
       isDragOver={isDragOver}
       role="region"
       aria-label={`${column.title} column with ${cards.length} ${cards.length === 1 ? 'card' : 'cards'}`}
+      tabIndex={0}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={(e) => {
+        // Only clear hover if focus is leaving the column entirely
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+          setIsHovered(false);
+        }
+      }}
       onDragEnter={onDragEnter}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
@@ -283,12 +349,22 @@ export function Column({
               aria-label="Edit column title"
             />
           ) : (
-            <span className="column-title">
-              <ColumnTitleDisplay onClick={handleStartEdit} title="Click to edit column name">
-                {column.title}
-              </ColumnTitleDisplay>
-              <span className="card-count">{cards.length}</span>
-            </span>
+            <>
+              <span className="column-title">
+                <ColumnTitleDisplay>{column.title}</ColumnTitleDisplay>
+                <span className="card-count">{cards.length}</span>
+              </span>
+
+              <ColumnActions className="column-actions">
+                <button
+                  onClick={handleStartEdit}
+                  aria-label={`Edit column name: ${column.title}`}
+                  title="Edit column name"
+                >
+                  ✏️
+                </button>
+              </ColumnActions>
+            </>
           )}
         </h2>
       </ColumnHeader>
