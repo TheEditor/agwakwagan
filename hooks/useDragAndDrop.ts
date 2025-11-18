@@ -130,12 +130,6 @@ export function useDragAndDrop(
 
       const dropIndex = dragState.dropIndicatorIndex ?? 0;
 
-      // Don't do anything if dropping in same position
-      if (sourceColumn === columnId && dragState.dragOverIndex === dropIndex) {
-        handleDragEnd();
-        return;
-      }
-
       // Execute the move
       onCardMove(cardId, columnId, dropIndex);
 
