@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { KanbanBoard } from "@/components/KanbanBoard";
+import { KanbanBoard } from "@/components/Board/KanbanBoard";
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -13,16 +13,14 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center h-screen">
-            <p className="text-gray-500">Loading board...</p>
-          </div>
-        }
-      >
-        <HomeContent />
-      </Suspense>
-    </main>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center h-screen">
+          <p style={{ color: 'var(--text-muted)' }}>Loading board...</p>
+        </div>
+      }
+    >
+      <HomeContent />
+    </Suspense>
   );
 }
