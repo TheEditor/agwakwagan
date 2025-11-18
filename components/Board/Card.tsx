@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import styled from '@emotion/styled';
 import { Card as CardType } from '@/types/board';
 import { formatDistanceToNow } from 'date-fns';
+import { EditCardForm } from './EditCardForm';
 
 const CardContainer = styled.div<{ isDragging: boolean; hasExternalId: boolean }>`
   background: var(--bg-card);
@@ -167,9 +168,23 @@ interface CardProps {
   card: CardType;
   onDragStart: (e: React.DragEvent) => void;
   onDragEnd: () => void;
+  isEditing?: boolean;
+  onEdit?: () => void;
+  onDelete?: () => void;
+  onUpdate?: (cardId: string, updates: Partial<Pick<CardType, 'title' | 'description'>>) => void;
+  onCancelEdit?: () => void;
 }
 
-export function Card({ card, onDragStart, onDragEnd }: CardProps) {
+export function Card({
+  card,
+  onDragStart,
+  onDragEnd,
+  isEditing = false,
+  onEdit,
+  onDelete,
+  onUpdate,
+  onCancelEdit,
+}: CardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -249,31 +264,59 @@ export function Card({ card, onDragStart, onDragEnd }: CardProps) {
       aria-label={`Card: ${card.title}`}
     >
       <CardActions className="card-actions">
-        <button aria-label="Edit card" title="Edit">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onEdit?.();
+          }}
+          aria-label="Edit card"
+          title="Edit"
+        >
           ✏️
         </button>
-        <button aria-label="Delete card" title="Delete">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete?.();
+          }}
+          aria-label="Delete card"
+          title="Delete"
+        >
           🗑️
         </button>
       </CardActions>
 
-      <CardTitle>{card.title}</CardTitle>
+      {isEditing ? (
+        <EditCardForm
+          initialTitle={card.title}
+          initialDescription={card.description}
+          onSubmit={(title, description) => {
+            onUpdate?.(card.id, { title, description });
+            onCancelEdit?.();
+          }}
+          onCancel={onCancelEdit || (() => {})}
+        />
+      ) : (
+        <>
+          <CardTitle>{card.title}</CardTitle>
 
-      {card.description && (
-        <CardDescription>{card.description}</CardDescription>
+          {card.description && (
+            <CardDescription>{card.description}</CardDescription>
+          )}
+
+          <CardMeta>
+            <span className="timestamp">
+              {formatDistanceToNow(new Date(card.updatedAt), { addSuffix: true })}
+            </span>
+
+            {card.notes && card.notes.length > 0 && (
+              <span className="notes-indicator">
+                📝 {card.notes.length}
+              </span>
+            )}
+          </CardMeta>
+        </>
       )}
-
-      <CardMeta>
-        <span className="timestamp">
-          {formatDistanceToNow(new Date(card.updatedAt), { addSuffix: true })}
-        </span>
-
-        {card.notes && card.notes.length > 0 && (
-          <span className="notes-indicator">
-            📝 {card.notes.length}
-          </span>
-        )}
-      </CardMeta>
     </CardContainer>
   );
 }

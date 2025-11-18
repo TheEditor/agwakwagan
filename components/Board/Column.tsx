@@ -149,6 +149,11 @@ interface ColumnProps {
   onStartAddCard: () => void;
   onCancelAddCard: () => void;
   dropIndicatorIndex: number | null;
+  editingCardId?: string | null;
+  onEditCard?: (cardId: string) => void;
+  onDeleteCard?: (cardId: string) => void;
+  onUpdateCard?: (cardId: string, updates: Partial<Pick<CardType, 'title' | 'description'>>) => void;
+  onCancelEditCard?: () => void;
 }
 
 export function Column({
@@ -165,6 +170,11 @@ export function Column({
   onStartAddCard,
   onCancelAddCard,
   dropIndicatorIndex,
+  editingCardId,
+  onEditCard,
+  onDeleteCard,
+  onUpdateCard,
+  onCancelEditCard,
 }: ColumnProps) {
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -212,6 +222,15 @@ export function Column({
               card={card}
               onDragStart={(e) => onCardDragStart(card.id, e)}
               onDragEnd={onCardDragEnd}
+              isEditing={editingCardId === card.id}
+              onEdit={() => onEditCard?.(card.id)}
+              onDelete={() => {
+                if (window.confirm(`Delete card "${card.title}"?`)) {
+                  onDeleteCard?.(card.id);
+                }
+              }}
+              onUpdate={onUpdateCard}
+              onCancelEdit={onCancelEditCard}
             />
             {dropIndicatorIndex === index + 1 && (
               <DropIndicator isActive={true} />

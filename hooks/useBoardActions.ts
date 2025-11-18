@@ -203,10 +203,104 @@ export function useBoardActions(
     [board, setBoard]
   );
 
+  /**
+   * Update a card's title and/or description
+   *
+   * @param cardId - Card to update
+   * @param updates - Object with title and/or description to update
+   */
+  const updateCard = useCallback(
+    (cardId: string, updates: Partial<Pick<Card, 'title' | 'description'>>) => {
+      if (!board) {
+        console.error("Cannot update card: board not loaded");
+        return;
+      }
+
+      const card = board.cards[cardId];
+      if (!card) {
+        console.error(`Cannot update card: card ${cardId} not found`);
+        return;
+      }
+
+      // Validate title if provided
+      if (updates.title !== undefined) {
+        const trimmedTitle = updates.title.trim();
+        if (!trimmedTitle) {
+          console.error("Cannot update card: title cannot be empty");
+          return;
+        }
+        if (trimmedTitle.length > 500) {
+          console.error("Cannot update card: title exceeds 500 characters");
+          return;
+        }
+      }
+
+      const updatedCards = {
+        ...board.cards,
+        [cardId]: {
+          ...card,
+          ...(updates.title !== undefined && { title: updates.title.trim() }),
+          ...(updates.description !== undefined && {
+            description: updates.description.trim() || undefined,
+          }),
+          updatedAt: new Date(),
+        },
+      };
+
+      const updatedBoard: Board = {
+        ...board,
+        cards: updatedCards,
+        metadata: {
+          ...board.metadata,
+          updatedAt: new Date(),
+        },
+      };
+
+      setBoard(updatedBoard);
+    },
+    [board, setBoard]
+  );
+
+  /**
+   * Delete a card from the board
+   *
+   * @param cardId - Card to delete
+   */
+  const deleteCard = useCallback(
+    (cardId: string) => {
+      if (!board) {
+        console.error("Cannot delete card: board not loaded");
+        return;
+      }
+
+      const card = board.cards[cardId];
+      if (!card) {
+        console.error(`Cannot delete card: card ${cardId} not found`);
+        return;
+      }
+
+      const { [cardId]: removed, ...remainingCards } = board.cards;
+
+      const updatedBoard: Board = {
+        ...board,
+        cards: remainingCards,
+        metadata: {
+          ...board.metadata,
+          updatedAt: new Date(),
+        },
+      };
+
+      setBoard(updatedBoard);
+    },
+    [board, setBoard]
+  );
+
   return {
     addCard,
     moveCard,
+    updateCard,
+    deleteCard,
     // Phase 3+ functions will be added here as needed:
-    // updateCard, deleteCard, addNote, deleteNote, addColumn, deleteColumn
+    // addNote, deleteNote, addColumn, deleteColumn
   };
 }
