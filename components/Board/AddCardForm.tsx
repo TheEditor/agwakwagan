@@ -143,6 +143,7 @@ export function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
           placeholder="Enter card title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          aria-label="Card title"
           required
         />
 
@@ -150,6 +151,7 @@ export function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
           placeholder="Add a description (optional)..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          aria-label="Card description (optional)"
         />
 
         <ButtonGroup>
@@ -157,6 +159,7 @@ export function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
             type="submit"
             className="primary"
             disabled={!title.trim()}
+            aria-label="Submit new card (Enter or click)"
           >
             Add Card
           </button>
@@ -164,6 +167,7 @@ export function AddCardForm({ onSubmit, onCancel }: AddCardFormProps) {
             type="button"
             className="secondary"
             onClick={onCancel}
+            aria-label="Cancel card creation (Escape)"
           >
             Cancel
           </button>

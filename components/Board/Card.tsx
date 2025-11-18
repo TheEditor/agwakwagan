@@ -226,8 +226,9 @@ export function Card({ card, onDragStart, onDragEnd }: CardProps) {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      // Open card details
-      console.log('Open card:', card.id);
+      e.preventDefault();
+      // Open card details modal (future feature)
+      console.log('Open card details:', card.id);
     }
   };
 

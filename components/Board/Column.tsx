@@ -180,6 +180,8 @@ export function Column({
     <ColumnContainer
       className="column"
       isDragOver={isDragOver}
+      role="region"
+      aria-label={`${column.title} column with ${cards.length} ${cards.length === 1 ? 'card' : 'cards'}`}
       onDragEnter={onDragEnter}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
@@ -223,7 +225,11 @@ export function Column({
             onCancel={onCancelAddCard}
           />
         ) : (
-          <AddButton onClick={onStartAddCard}>
+          <AddButton
+            onClick={onStartAddCard}
+            aria-label={`Add a new card to ${column.title} column`}
+            title={`Add a new card to ${column.title} column`}
+          >
             + Add a card
           </AddButton>
         )}

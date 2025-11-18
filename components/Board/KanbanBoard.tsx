@@ -155,6 +155,29 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
     });
   }, [board]);
 
+  // Keyboard shortcuts for accessibility
+  useEffect(() => {
+    const handleGlobalKeydown = (e: KeyboardEvent) => {
+      // Alt+N: Add new card (focus first "Add a card" button)
+      if (e.altKey && e.key === 'n') {
+        e.preventDefault();
+        const firstAddButton = document.querySelector('button[aria-label*="Add a new card"]') as HTMLButtonElement;
+        if (firstAddButton) {
+          firstAddButton.focus();
+          firstAddButton.click();
+        }
+      }
+      // Alt+S: Sync board
+      if (e.altKey && e.key === 's') {
+        e.preventDefault();
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeydown);
+    return () => window.removeEventListener('keydown', handleGlobalKeydown);
+  }, []);
+
   if (!isLoaded) {
     return <LoadingState />;
   }
@@ -177,10 +200,18 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
           <span className="board-name">{board.id}</span>
         </h1>
         <HeaderActions>
-          <button onClick={() => window.location.reload()}>
+          <button
+            onClick={() => window.location.reload()}
+            aria-label="Sync board with server (Alt+S)"
+            title="Sync board with server (Alt+S)"
+          >
             Sync
           </button>
-          <button onClick={() => console.log('Settings')}>
+          <button
+            onClick={() => console.log('Settings')}
+            aria-label="Board settings"
+            title="Board settings"
+          >
             Settings
           </button>
         </HeaderActions>
