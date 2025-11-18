@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Board, Column as ColumnType, Card as CardType } from '@/types/board';
 import { Column } from './Column';
+import { SettingsModal } from './SettingsModal';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useBoard } from '@/hooks/useBoard';
 
@@ -135,7 +136,7 @@ interface KanbanBoardProps {
 }
 
 export function KanbanBoard({ boardId }: KanbanBoardProps) {
-  const { board, isLoaded, moveCard, addCard } = useBoard(boardId);
+  const { board, isLoaded, moveCard, addCard, updateCard, deleteCard } = useBoard(boardId);
   const {
     dragState,
     handleDragStart,
@@ -146,6 +147,8 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
   } = useDragAndDrop(moveCard);
 
   const [isAddingCard, setIsAddingCard] = useState<string | null>(null);
+  const [showSettings, setShowSettings] = useState(false);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
 
   // Animate on mount
   useEffect(() => {
@@ -208,7 +211,7 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
             Sync
           </button>
           <button
-            onClick={() => console.log('Settings')}
+            onClick={() => setShowSettings(true)}
             aria-label="Board settings"
             title="Board settings"
           >
@@ -251,11 +254,25 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
                     ? dragState.dropIndicatorIndex
                     : null
                 }
+                editingCardId={editingCardId}
+                onEditCard={setEditingCardId}
+                onDeleteCard={(cardId) => {
+                  deleteCard(cardId);
+                  if (editingCardId === cardId) {
+                    setEditingCardId(null);
+                  }
+                }}
+                onUpdateCard={updateCard}
+                onCancelEditCard={() => setEditingCardId(null)}
               />
             );
           })}
         </ColumnsContainer>
       </ColumnsWrapper>
+
+      {showSettings && (
+        <SettingsModal boardId={boardId} onClose={() => setShowSettings(false)} />
+      )}
     </BoardContainer>
   );
 }
