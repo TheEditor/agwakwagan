@@ -6,6 +6,7 @@ import { Board, Column as ColumnType, Card as CardType } from '@/types/board';
 import { Column } from './Column';
 import { SettingsModal } from './SettingsModal';
 import { AddColumnForm } from './AddColumnForm';
+import { KeyboardHints } from './KeyboardHints';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useBoard } from '@/hooks/useBoard';
 
@@ -332,6 +333,8 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
       {showSettings && (
         <SettingsModal boardId={boardId} onClose={() => setShowSettings(false)} />
       )}
+
+      <KeyboardHints />
     </BoardContainer>
   );
 }

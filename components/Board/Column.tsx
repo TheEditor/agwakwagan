@@ -270,16 +270,25 @@ export function Column({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Only respond to F2 when this column is hovered/focused and not already editing
-      if (e.key === 'F2' && isHovered && !isEditingTitle) {
-        e.preventDefault();
-        handleStartEdit();
+      // Only respond when column is hovered/focused and not already editing
+      if (!isEditingTitle && isHovered) {
+        // F2 to edit column name
+        if (e.key === 'F2') {
+          e.preventDefault();
+          handleStartEdit();
+        }
+
+        // Delete or Backspace to delete column
+        if ((e.key === 'Delete' || e.key === 'Backspace') && totalColumnCount > 1) {
+          e.preventDefault();
+          setShowDeleteModal(true);
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isHovered, isEditingTitle]);
+  }, [isHovered, isEditingTitle, totalColumnCount]);
 
   const handleStartEdit = () => {
     setEditTitle(column.title);
@@ -375,7 +384,7 @@ export function Column({
                   <button
                     onClick={() => setShowDeleteModal(true)}
                     aria-label={`Delete column: ${column.title}`}
-                    title="Delete column"
+                    title="Delete column (Del)"
                   >
                     🗑️
                   </button>
