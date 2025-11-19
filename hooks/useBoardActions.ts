@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { Board, Card } from "@/types/board";
+import { Board, Card, Column } from "@/types/board";
 import { generateId } from "@/utils/ids";
 
 /**
@@ -349,13 +349,171 @@ export function useBoardActions(
     [board, setBoard]
   );
 
+  /**
+   * Add a new column to the board
+   *
+   * @param title - Column title (required, 1-50 chars)
+   * @param afterColumnId - Optional column ID to insert after
+   */
+  const addColumn = useCallback(
+    (title: string, afterColumnId?: string) => {
+      if (!board) {
+        console.error("Cannot add column: board not loaded");
+        return;
+      }
+
+      // Validate title
+      const trimmedTitle = title.trim();
+      if (!trimmedTitle) {
+        console.error("Cannot add column: title is required");
+        return;
+      }
+
+      if (trimmedTitle.length > 50) {
+        console.error("Cannot add column: title exceeds 50 characters");
+        return;
+      }
+
+      const columnId = generateId("column");
+      const now = new Date();
+
+      // Create new column
+      const newColumn: Column = {
+        id: columnId,
+        title: trimmedTitle,
+        order: 0, // Will recalculate
+      };
+
+      // Determine position in columnOrder
+      let newColumnOrder = [...board.columnOrder];
+      if (afterColumnId && newColumnOrder.includes(afterColumnId)) {
+        const index = newColumnOrder.indexOf(afterColumnId);
+        newColumnOrder.splice(index + 1, 0, columnId);
+      } else {
+        newColumnOrder.push(columnId); // Add to end
+      }
+
+      // Recalculate order values for all columns
+      const updatedColumns = { ...board.columns, [columnId]: newColumn };
+      newColumnOrder.forEach((id, index) => {
+        if (updatedColumns[id]) {
+          updatedColumns[id].order = index;
+        }
+      });
+
+      const updatedBoard: Board = {
+        ...board,
+        columns: updatedColumns,
+        columnOrder: newColumnOrder,
+        metadata: {
+          ...board.metadata,
+          updatedAt: now,
+        },
+      };
+
+      setBoard(updatedBoard);
+    },
+    [board, setBoard]
+  );
+
+  /**
+   * Delete a column from the board
+   *
+   * Cannot delete the last column. Cards can be moved to another column
+   * or deleted entirely.
+   *
+   * @param columnId - Column to delete
+   * @param moveCardsTo - Optional target column ID to move cards to
+   */
+  const deleteColumn = useCallback(
+    (columnId: string, moveCardsTo?: string) => {
+      if (!board) {
+        console.error("Cannot delete column: board not loaded");
+        return;
+      }
+
+      if (!board.columns[columnId]) {
+        console.error(`Cannot delete column: column ${columnId} not found`);
+        return;
+      }
+
+      // Cannot delete last column
+      if (board.columnOrder.length <= 1) {
+        console.error("Cannot delete the last column");
+        return;
+      }
+
+      const now = new Date();
+      const updatedCards = { ...board.cards };
+
+      // Handle cards in the deleted column
+      const cardsInColumn = Object.values(updatedCards).filter(
+        (c) => c.columnId === columnId
+      );
+
+      if (moveCardsTo && board.columns[moveCardsTo]) {
+        // Move cards to target column
+        const targetCards = Object.values(updatedCards).filter(
+          (c) => c.columnId === moveCardsTo
+        );
+        const maxOrder =
+          targetCards.length > 0
+            ? Math.max(...targetCards.map((c) => c.order))
+            : -1;
+
+        cardsInColumn.forEach((card, index) => {
+          updatedCards[card.id] = {
+            ...card,
+            columnId: moveCardsTo,
+            order: maxOrder + index + 1,
+            updatedAt: now,
+          };
+        });
+      } else {
+        // Delete all cards in column
+        cardsInColumn.forEach((card) => {
+          delete updatedCards[card.id];
+        });
+      }
+
+      // Remove column
+      const updatedColumns = { ...board.columns };
+      delete updatedColumns[columnId];
+
+      const updatedColumnOrder = board.columnOrder.filter(
+        (id) => id !== columnId
+      );
+
+      // Recalculate order for remaining columns
+      updatedColumnOrder.forEach((id, index) => {
+        if (updatedColumns[id]) {
+          updatedColumns[id].order = index;
+        }
+      });
+
+      const updatedBoard: Board = {
+        ...board,
+        columns: updatedColumns,
+        columnOrder: updatedColumnOrder,
+        cards: updatedCards,
+        metadata: {
+          ...board.metadata,
+          updatedAt: now,
+        },
+      };
+
+      setBoard(updatedBoard);
+    },
+    [board, setBoard]
+  );
+
   return {
     addCard,
     moveCard,
     updateCard,
     deleteCard,
     updateColumn,
-    // Phase 3+ functions will be added here as needed:
-    // addNote, deleteNote, addColumn, deleteColumn
+    addColumn,
+    deleteColumn,
   };
 }
