@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { Board, Column as ColumnType, Card as CardType } from '@/types/board';
 import { Column } from './Column';
 import { SettingsModal } from './SettingsModal';
+import { AddColumnForm } from './AddColumnForm';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useBoard } from '@/hooks/useBoard';
 
@@ -131,12 +132,39 @@ const ColumnsContainer = styled.div`
   }
 `;
 
+const AddColumnButton = styled.button`
+  flex: 0 0 320px;
+  height: 48px;
+  background: transparent;
+  border: 2px dashed var(--border-default);
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover {
+    border-color: var(--maroon);
+    color: var(--maroon);
+    background: rgba(109, 46, 66, 0.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+`;
+
 interface KanbanBoardProps {
   boardId: string;
 }
 
 export function KanbanBoard({ boardId }: KanbanBoardProps) {
-  const { board, isLoaded, moveCard, addCard, updateCard, deleteCard, updateColumn } = useBoard(boardId);
+  const { board, isLoaded, moveCard, addCard, updateCard, deleteCard, updateColumn, addColumn, deleteColumn } = useBoard(boardId);
   const {
     dragState,
     handleDragStart,
@@ -149,6 +177,7 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
   const [isAddingCard, setIsAddingCard] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
+  const [showAddColumnForm, setShowAddColumnForm] = useState(false);
 
   // Animate on mount
   useEffect(() => {
@@ -195,6 +224,13 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
       .sort((a, b) => a.order - b.order);
   };
 
+  const getOtherColumns = (columnId: string): ColumnType[] => {
+    return board.columnOrder
+      .filter(id => id !== columnId)
+      .map(id => board.columns[id])
+      .filter((col): col is ColumnType => col !== undefined);
+  };
+
   return (
     <BoardContainer>
       <BoardHeader>
@@ -228,6 +264,7 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
 
             const cards = getCardsForColumn(columnId);
             const isDragOver = dragState.dragOverColumn === columnId;
+            const otherColumns = getOtherColumns(columnId);
 
             return (
               <Column
@@ -265,9 +302,30 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
                 onUpdateCard={updateCard}
                 onCancelEditCard={() => setEditingCardId(null)}
                 onUpdateColumn={updateColumn}
+                onDeleteColumn={deleteColumn}
+                otherColumns={otherColumns}
+                totalColumnCount={board.columnOrder.length}
               />
             );
           })}
+
+          {showAddColumnForm ? (
+            <AddColumnForm
+              onSubmit={(title) => {
+                addColumn(title);
+                setShowAddColumnForm(false);
+              }}
+              onCancel={() => setShowAddColumnForm(false)}
+            />
+          ) : (
+            <AddColumnButton
+              onClick={() => setShowAddColumnForm(true)}
+              aria-label="Add a new column"
+              title="Add a new column"
+            >
+              + Add Column
+            </AddColumnButton>
+          )}
         </ColumnsContainer>
       </ColumnsWrapper>
 

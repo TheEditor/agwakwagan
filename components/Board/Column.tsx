@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { Column as ColumnType, Card as CardType } from '@/types/board';
 import { Card } from './Card';
 import { AddCardForm } from './AddCardForm';
+import { DeleteColumnModal } from './DeleteColumnModal';
 
 const ColumnContainer = styled.div<{ isDragOver: boolean }>`
   flex: 0 0 320px;
@@ -225,6 +226,9 @@ interface ColumnProps {
   onUpdateCard?: (cardId: string, updates: Partial<Pick<CardType, 'title' | 'description'>>) => void;
   onCancelEditCard?: () => void;
   onUpdateColumn?: (columnId: string, updates: Partial<Pick<ColumnType, 'title'>>) => void;
+  onDeleteColumn?: (columnId: string, moveCardsTo?: string) => void;
+  otherColumns?: ColumnType[];
+  totalColumnCount?: number;
 }
 
 export function Column({
@@ -247,10 +251,14 @@ export function Column({
   onUpdateCard,
   onCancelEditCard,
   onUpdateColumn,
+  onDeleteColumn,
+  otherColumns = [],
+  totalColumnCount = 1,
 }: ColumnProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editTitle, setEditTitle] = useState(column.title);
   const [isHovered, setIsHovered] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const titleInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -359,10 +367,19 @@ export function Column({
                 <button
                   onClick={handleStartEdit}
                   aria-label={`Edit column name: ${column.title}`}
-                  title="Edit column name"
+                  title="Edit column name (F2)"
                 >
                   ✏️
                 </button>
+                {totalColumnCount > 1 && (
+                  <button
+                    onClick={() => setShowDeleteModal(true)}
+                    aria-label={`Delete column: ${column.title}`}
+                    title="Delete column"
+                  >
+                    🗑️
+                  </button>
+                )}
               </ColumnActions>
             </>
           )}
@@ -411,6 +428,19 @@ export function Column({
           </AddButton>
         )}
       </CardsContainer>
+
+      {showDeleteModal && (
+        <DeleteColumnModal
+          column={column}
+          cardCount={cards.length}
+          targetColumns={otherColumns}
+          onConfirm={(moveCardsTo) => {
+            onDeleteColumn?.(column.id, moveCardsTo);
+            setShowDeleteModal(false);
+          }}
+          onCancel={() => setShowDeleteModal(false)}
+        />
+      )}
     </ColumnContainer>
   );
 }
