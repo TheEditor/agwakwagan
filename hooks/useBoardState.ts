@@ -48,7 +48,14 @@ export function useBoardState(
         }
 
         // Parse and hydrate dates
-        const parsed = JSON.parse(item) as Board;
+        let parsed: Board;
+        try {
+          parsed = JSON.parse(item) as Board;
+        } catch (parseError) {
+          console.error(`Corrupted board data for "${boardId}":`, parseError);
+          return defaultBoard;
+        }
+
         parsed.metadata.createdAt = new Date(parsed.metadata.createdAt);
         parsed.metadata.updatedAt = new Date(parsed.metadata.updatedAt);
         Object.values(parsed.cards).forEach((card) => {

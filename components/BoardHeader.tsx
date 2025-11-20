@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Board } from "@/types/board";
@@ -12,6 +12,7 @@ import { exportBoard } from "@/utils/export";
 import { BoardSelector } from "./BoardSelector";
 import { ToastContainer } from "./ToastContainer";
 import { ThemeToggle } from "./ThemeToggle";
+import { InputDialog } from "./ui/InputDialog";
 
 /**
  * BoardHeader - Header with board selector, theme toggle, export, and save status
@@ -34,6 +35,7 @@ export function BoardHeader({
 }: BoardHeaderProps) {
   const router = useRouter();
   const { toasts, removeToast, success, error } = useToast();
+  const [showCreateBoardDialog, setShowCreateBoardDialog] = useState(false);
 
   /**
    * Format relative time for save status
@@ -118,10 +120,15 @@ export function BoardHeader({
    * Handle creating a new board
    */
   const handleCreateBoard = useCallback(() => {
-    const newBoardId = prompt("Enter a name for the new board (e.g., 'football-schedule'):");
-    if (newBoardId && newBoardId.trim()) {
-      router.push(`/?board=${encodeURIComponent(newBoardId.trim())}`);
-    }
+    setShowCreateBoardDialog(true);
+  }, []);
+
+  /**
+   * Handle board creation dialog submission
+   */
+  const handleCreateBoardSubmit = useCallback((boardName: string) => {
+    router.push(`/?board=${encodeURIComponent(boardName)}`);
+    setShowCreateBoardDialog(false);
   }, [router]);
 
   /**
@@ -194,6 +201,24 @@ export function BoardHeader({
       </header>
 
       <ToastContainer toasts={toasts} onClose={removeToast} />
+
+      <InputDialog
+        isOpen={showCreateBoardDialog}
+        title="Create New Board"
+        message="Give your board a name (e.g., 'football-schedule', 'project-plan')"
+        placeholder="Board name"
+        onSubmit={handleCreateBoardSubmit}
+        onCancel={() => setShowCreateBoardDialog(false)}
+        validate={(value) => {
+          if (!value || !value.trim()) {
+            return 'Board name cannot be empty';
+          }
+          if (value.length > 100) {
+            return 'Board name must be 100 characters or less';
+          }
+          return null;
+        }}
+      />
     </>
   );
 }

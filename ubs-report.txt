@@ -1,0 +1,1244 @@
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗              ║
+║  ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝              ║
+║  ██║   ██║██║     ██║   ██║██╔████╔██║███████║   ██║   █████╗                ║
+║  ██║   ██║██║     ██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝                ║
+║  ╚██████╔╝███████╗██║   ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗              ║
+║   ╚═════╝ ╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝              ║
+║                                                                              ║
+║  ██████╗ ██╗   ██╗ ██████╗         __       __                               ║
+║  ██╔══██╗██║   ██║██╔════╝         \ `-'"-'` /                               ║
+║  ██████╔╝██║   ██║██║  ███╗        / \_   _/ \                               ║
+║  ██╔══██╗██║   ██║██║   ██║        |  d\_/b  |                               ║
+║  ██████╔╝╚██████╔╝╚██████╔╝       .'\   V   /'.                              ║
+║  ╚═════╝  ╚═════╝  ╚═════╝        /   '-...-'   \                            ║
+║                                  | /         \ |                             ║
+║                                  \/\         /\/                             ║
+║                                  ==(||)---(||)==                             ║
+║                                                                              ║
+║  ███████╗  ██████╗   █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗              ║
+║  ██╔════╝  ██╔═══╝  ██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗             ║
+║  ███████╗  ██║      ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝             ║
+║  ╚════██║  ██║      ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗             ║
+║  ███████║  ██████╗  ██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║             ║
+║  ╚══════╝  ╚═════╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝                  ║
+║                                                                              ║
+║     JS / TS • PYTHON • C / C++ • RUST • GO • JAVA • RUBY • SWIFT             ║
+║                    UBS: ULTIMATE BUG SCANNER • SARIF FUSION ☄️               ║
+║                                                                              ║
+║                                                                              ║
+║                     Night Owl QA                                             ║
+║                     “We see bugs before you do.”                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+UBS Meta-Runner v4.6.0  2025-11-19 18:25:43
+Project: /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan
+Format:  text
+Detected: js python cpp
+Scanning js...
+Scanning python...
+Scanning cpp...
+Finished js (175s)
+Finished cpp (435s)
+Finished python (626s)
+
+──────── js ────────
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║  ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗   ║
+║  ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝   ║
+║  ██║   ██║██║     ██║   ██║██╔████╔██║███████║   ██║   █████╗     ║
+║  ██║   ██║██║     ██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝     ║
+║  ╚██████╔╝███████╗██║   ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗   ║
+║   ╚═════╝ ╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝   ║
+║                                                                   ║
+║  ██████╗ ██╗   ██╗ ██████╗          ████████████████████████      ║
+║  ██╔══██╗██║   ██║██╔════╝          ████████████████████████      ║
+║  ██████╔╝██║   ██║██║  ███╗         ████████████████████████      ║
+║  ██╔══██╗██║   ██║██║   ██║         ██████████  ████    ████      ║
+║  ██████╔╝╚██████╔╝╚██████╔╝         ██████████  ██  ████████      ║
+║  ╚═════╝  ╚═════╝  ╚═════╝          ██████████  ████    ████      ║
+║                                     ██████████  ████████  ██      ║
+║                                     ██████████  ██  ████  ██      ║
+║                                     ██████    ██████    ████      ║
+║                                     ████████████████████████      ║
+║                                                                   ║
+║  ███████╗  ██████╗   █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗   ║
+║  ██╔════╝  ██╔═══╝  ██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗  ║
+║  ███████╗  ██║      ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝  ║
+║  ╚════██║  ██║      ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗  ║
+║  ███████║  ██████╗  ██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║  ║
+║  ╚══════╝  ╚═════╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝       ║
+║                                                                   ║
+║  JavaScript/TypeScript sentinel • DOM, async, security heuristics ║
+║  UBS module: js • AST-grep signal • multi-agent guardrail ready   ║
+║  ASCII homage: aemkei hexagon JS logo                             ║
+║  Run standalone: modules/ubs-js.sh --help                         ║
+║                                                                   ║
+║  Night Owl QA                                                     ║
+║  “We see bugs before you do.”                                     ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Project:  /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan
+Started:  2025-11-19T23:26:04Z
+Files:    52 source files (js,jsx,ts,tsx,mjs,cjs)
+Focus areas include NULL SAFETY, SECURITY VULNERABILITIES, Lightweight taint analysis, async pitfalls, and resource lifecycle.
+
+✓ ast-grep available (npx -y @ast-grep/cli) - full AST analysis enabled
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. NULL SAFETY & DEFENSIVE PROGRAMMING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Null pointer dereferences, missing guards, unsafe property access
+These bugs cause 'Cannot read property of null/undefined' runtime crashes
+
+• Unguarded property access after getElementById/querySelector
+  ℹ Info (2 found)
+    Some DOM queries may need null checks
+    Review each to ensure the element is guaranteed to exist
+
+• Optional chaining opportunities (?.)
+  ✓ OK Minimal optional chaining opportunities
+
+• Nullish coalescing opportunities (??)
+
+• Accessing nested properties without guards
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. MATH & ARITHMETIC PITFALLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Division by zero, NaN propagation, floating-point equality
+Mathematical bugs that produce silent errors or Infinity/NaN values
+
+• Division operations (potential ÷0)
+  ⚠ Warning (337 found)
+    Division by variable - verify non-zero
+    Add guards: if (divisor === 0) throw; or use fallback
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/api/auth/apiKeyProvider.ts:1
+      import { NextRequest } from 'next/server';
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/api/auth/apiKeyProvider.ts:2
+      import { AuthProvider } from './provider';
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/api/auth/apiKeyProvider.ts:25
+          // Load API keys from environment
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/api/auth/apiKeyProvider.ts:28
+          // Load from environment variables
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/api/auth/apiKeyProvider.ts:32
+              boards: ['*'], // Access to all boards
+
+• Incorrect NaN checks (== NaN instead of Number.isNaN)
+  ✓ OK No direct NaN comparisons
+
+• isNaN() instead of Number.isNaN()
+  ⚠ Warning (1 found)
+    Using global isNaN() - use Number.isNaN()
+    isNaN('foo') → true; Number.isNaN('foo') → false
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/utils/ids.ts:59
+        return isNaN(timestamp) ? null : timestamp;
+
+• Floating-point equality (===)
+
+• Modulo by variable (verify non-zero)
+
+• Bitwise operations on non-integers
+  ℹ Info (77 found)
+    Bitwise operations detected - ensure integer inputs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. ARRAY & COLLECTION SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Index out of bounds, mutation bugs, unsafe iteration
+Array bugs cause undefined access, incorrect results, or crashes
+
+• Array access with arithmetic offsets (bounds risk)
+
+• Array.length used in arithmetic without validation
+
+• Mutation of array during iteration
+
+• Array holes (sparse arrays)
+
+• Missing array existence checks before .length
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. TYPE COERCION & COMPARISON TRAPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Loose equality, type confusion, implicit conversions
+JavaScript's type coercion causes subtle bugs that are hard to debug
+
+• Loose equality (== instead of ===)
+  ✓ OK All comparisons use strict equality
+
+• Comparing different types
+  ℹ Info (32 found)
+    Type comparisons - verify both sides match
+
+• typeof checks with wrong string literals
+
+• Truthy/falsy confusion in conditions
+
+• Implicit string concatenation with +
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. ASYNC/AWAIT & PROMISE PITFALLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Missing await, unhandled rejections, race conditions
+Async bugs cause unpredictable behavior, crashes, and data corruption
+  ℹ Info (17 found)
+    Async functions found
+    Verifying proper await/error handling...
+
+• Race conditions with Promise.race/any
+
+• Async error path coverage
+  ℹ Info (0 found)
+    Async rule checks
+    ast-grep scan failed
+  ℹ Info (0 found)
+    Async fallback disabled
+    Run with --fail-on-warning to surface missing .catch()/try blocks when ast-grep is unavailable
+
+• React hooks dependency analysis
+  ✓ OK Hooks dependency arrays look accurate
+
+• Type narrowing validation
+  ℹ Info (0 found)
+    Type narrowing helper missing
+    Helper script /c/Users/davef/.local/share/ubs/modules/helpers/type_narrowing_ts.js not found
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. ERROR HANDLING ANTI-PATTERNS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Swallowed errors, missing cleanup, poor error messages
+Bad error handling makes debugging impossible and causes production failures
+
+• Error handling best practices
+  ℹ Info (0 found)
+    Error handling AST rules
+    ast-grep scan failed
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. SECURITY VULNERABILITIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Code injection, XSS, prototype pollution, timing attacks
+Security bugs expose users to attacks and data breaches
+
+• eval() usage (CRITICAL SECURITY RISK)
+  ✓ OK No eval() detected
+
+• new Function() (eval equivalent)
+
+• innerHTML with potential XSS risk
+  ℹ Info (3 found)
+    innerHTML usage - verify data is trusted
+
+• document.write (deprecated & dangerous)
+
+• Prototype pollution vulnerability
+
+• Hardcoded secrets/credentials
+
+• RegExp denial of service (ReDoS) risk
+
+• Lightweight taint analysis
+  ✓ OK No tainted sources reach dangerous sinks
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. FUNCTION & SCOPE ISSUES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Missing return, callback hell, closure leaks
+Function bugs cause incorrect results and memory leaks
+
+• Functions with high parameter count (>5)
+
+• Arrow functions with implicit return confusion
+  ℹ Info (140 found)
+    Arrow functions with { } - verify return intent
+    () => {x:1} returns undefined; wrap object: () => ({x:1})
+
+• Nested callbacks (callback hell)
+  ℹ Info (70 found)
+    Many callback-style functions detected
+    Review for unnecessary nesting; prefer async/await or Promises
+
+• Function declarations inside blocks
+
+• Missing return in functions
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. PARSING & TYPE CONVERSION BUGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: parseInt errors, JSON parsing, date issues
+Parsing bugs cause data corruption and incorrect calculations
+
+• parseInt without radix parameter
+  ✓ OK All parseInt calls specify radix
+
+• JSON.parse without try/catch
+  ⚠ Warning (1 found)
+    JSON.parse without error handling
+    Wrap in try/catch or validate input first
+    hooks\useBoardState.ts:51  const parsed = JSON.parse(item) as Board;
+
+• parseFloat precision issues
+
+• new Date() without validation
+  ℹ Info (65 found)
+    Date construction - verify input validation
+    new Date('invalid') → Invalid Date
+
+• Implicit numeric conversion via unary +
+  ℹ Info (12 found)
+    Unary + for type conversion
+    Use Number(x) for clarity
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. CONTROL FLOW GOTCHAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Missing breaks, unreachable code, confusing conditions
+Control flow bugs cause logic errors and unexpected behavior
+
+• Switch cases without break/return
+
+• Switch without default case
+
+• Nested ternaries (readability nightmare)
+
+• Unreachable code after return
+
+• Empty if/else blocks
+
+• Yoda conditions (confusing style)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11. DEBUGGING & PRODUCTION CODE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: console.log, debugger, dead code
+Debug code left in production affects performance and leaks info
+  ⚠ Warning (63 found)
+    Many console.* statements
+    Use a logging library
+
+• debugger statements (MUST REMOVE)
+  ✓ OK No debugger statements
+
+• alert/confirm/prompt (blocking UI)
+  ⚠ Warning (5 found)
+    Blocking dialogs - poor UX
+    Use modals or toast notifications instead
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/components/Board/Column.tsx:412
+                      if (window.confirm(`Delete card "${card.title}"?`)) {
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/components/Board/SettingsModal.tsx:262
+                              alert('Invalid board file. Please select a valid JSON export.');
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/components/BoardHeader.tsx:121
+          const newBoardId = prompt("Enter a name for the new board (e.g., 'football-schedule'):");
+
+• console.log with sensitive data
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+12. MEMORY LEAKS & PERFORMANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Event listener leaks, closures, heavy operations
+Performance bugs cause slowdowns, crashes, and poor user experience
+  ℹ Info (5 found)
+    Event listeners attached
+  ℹ Info (5 found)
+    Event listeners removed
+
+• setInterval without clearInterval
+
+• setTimeout without clearTimeout
+
+• Large inline arrays/objects (memory waste)
+
+• Synchronous operations in loops
+
+• String concatenation in loops
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+13. VARIABLE & SCOPE ISSUES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: var usage, global pollution, shadowing
+Scope bugs cause hard-to-debug variable conflicts
+
+• var declarations (use let/const)
+  ⚠ Warning (248 found)
+    Using 'var' instead of let/const
+    var is function-scoped and hoisted
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/hooks/useDragAndDrop.ts:42
+            background: var(--bg-card);
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/hooks/useDragAndDrop.ts:45
+            box-shadow: var(--shadow-xl);
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/app/page.tsx:19
+                <p style={{ color: 'var(--text-muted)' }}>Loading board...</p>
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/components/Board/AddCardForm.tsx:7
+        background: var(--bg-card);
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/components/Board/AddCardForm.tsx:10
+        border: 2px solid var(--maroon);
+
+• Global variable pollution
+  🔥 CRITICAL (211 found)
+    Global variable assignments
+    Missing const/let. Creates globals
+    app\page.tsx:17  fallback={
+    components\BoardHeader.tsx:63  className="inline-block w-3 h-3 bg-[var(--color-saving)] rounded-full"
+    components\BoardHeader.tsx:64  animate={{ scale: [1, 1.2, 1] }}
+    components\BoardHeader.tsx:65  transition={{ repeat: Infinity, duration: 1.5 }}
+    components\BoardHeader.tsx:145  currentBoardId={board.id}
+
+• Variable shadowing
+
+• const reassignment attempts
+  ✓ OK Using const appropriately
+
+• Unused variables (heuristic)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+14. CODE QUALITY MARKERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: TODO, FIXME, HACK, XXX comments
+Technical debt markers indicate incomplete or problematic code
+  ⚠ Warning (21 found)
+    Significant technical debt
+    Create tracking tickets
+
+  Breakdown:
+    TODO:  11
+    XXX:   10
+    NOTE:  34
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+15. REGEX & STRING SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: ReDoS, regex injection, string escaping issues
+Regex bugs cause performance issues and security vulnerabilities
+
+• ReDoS vulnerable patterns
+
+• RegExp with user input (injection risk)
+
+• Missing string escaping in regex
+
+• Case-insensitive regex without /i flag
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+16. DOM MANIPULATION SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Missing null checks, inefficient queries, event leaks
+DOM bugs cause crashes and performance issues
+
+• querySelector/getElementById calls
+  ℹ Info (4 found)
+    DOM queries found
+    Ensure all queries have null checks before property access
+
+• Uncached DOM queries in loops
+
+• Direct style manipulation
+
+• Missing event delegation opportunities
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+17. TYPESCRIPT STRICTNESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: any usage, non-null assertions, implicit any
+Looser types reduce safety and increase runtime failures
+
+• Explicit any annotations
+  ℹ Info (6 found)
+    Explicit any types present
+    Prefer unknown or generics
+
+• Non-null assertion operator (!)
+  ℹ Info (2 found)
+    Non-null assertions used
+    Audit for potential NPE at runtime
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+18. NODE.JS I/O & MODULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: sync filesystem calls, dynamic require(), JSON.parse(file) without try
+Sync I/O blocks event loop; dynamic requires hinder bundling and caching
+
+• Synchronous fs operations
+
+• Dynamic require()
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+19. RESOURCE LIFECYCLE CORRELATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Acquire/release imbalances for listeners, timers, observers
+Unreleased resources leak memory, CPU, and event handlers across renders
+
+• Resource lifecycle correlation
+  ℹ Info (0 found)
+    Resource lifecycle checks
+    ast-grep scan failed
+  ✓ OK All tracked resource acquisitions have matching cleanups
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AST-GREP RULE PACK FINDINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠ ast-grep scan subcommand unavailable; rule-pack mode skipped.
+
+═══════════════════════════════════════════════════════════════════════════
+                    🎯 SCAN COMPLETE 🎯                                  
+═══════════════════════════════════════════════════════════════════════════
+
+Summary Statistics:
+  Files scanned:    52
+  Critical issues:  211
+  Warning issues:   676
+  Info items:       440
+
+Priority Actions:
+  🔥 FIX CRITICAL ISSUES IMMEDIATELY
+  These cause crashes, security vulnerabilities, or data corruption
+  ⚠ Review and fix WARNING items
+  These cause bugs, performance issues, or maintenance problems
+  ℹ Consider INFO suggestions
+  Code quality improvements and best practices
+
+Scan completed at: 2025-11-19T23:28:51Z
+
+Tip: Run with -v/--verbose for more code samples per finding.
+Add to pre-commit: ./ubs --ci --fail-on-warning . > bug-scan-report.txt
+
+
+──────── python ────────
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║  ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗   ║
+║  ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝   ║
+║  ██║   ██║██║     ██║   ██║██╔████╔██║███████║   ██║   █████╗     ║
+║  ██║   ██║██║     ██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝     ║
+║  ╚██████╔╝███████╗██║   ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗   ║
+║   ╚═════╝ ╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝   ║
+║                                                                   ║
+║  ██████╗ ██╗   ██╗ ██████╗                /^\/^\                  ║
+║  ██╔══██╗██║   ██║██╔════╝              _|__|  O|                 ║
+║  ██████╔╝██║   ██║██║  ███╗            /~     \_/ \               ║
+║  ██╔══██╗██║   ██║██║   ██║           |__________/ \              ║
+║  ██████╔╝╚██████╔╝╚██████╔╝            \_______    \              ║
+║  ╚═════╝  ╚═════╝  ╚═════╝                     `\   \             ║
+║                                                  |   |            ║
+║                                                 /   /             ║
+║                                                /   /              ║
+║                                                                   ║
+║  ███████╗  ██████╗   █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗   ║
+║  ██╔════╝  ██╔═══╝  ██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗  ║
+║  ███████╗  ██║      ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝  ║
+║  ╚════██║  ██║      ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗  ║
+║  ███████║  ██████╗  ██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║  ║
+║  ╚══════╝  ╚═════╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝       ║
+║                                                                   ║
+║  Python module • async/await, serialization, venv heuristics      ║
+║  UBS module: python • catches None bugs & async blocking          ║
+║  ASCII homage: classic snake (ASCII Art Archive)                  ║
+║  Run standalone: modules/ubs-python.sh --help                     ║
+║                                                                   ║
+║  Night Owl QA                                                     ║
+║  “We see bugs before you do.”                                     ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Project:  /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan
+Started:  2025-11-19T23:26:04Z
+Files:    1 source files (py,pyi,pyx,pxd,pxi,ipynb)
+
+✓ ast-grep available (npx -y @ast-grep/cli) - full AST analysis enabled
+⚠ uv not found - ruff/bandit/pip-audit via system if present
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. NONE / DEFENSIVE PROGRAMMING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: None equality, truthy confusions, deep attribute chains
+Pythonic checks use 'is (not) None' and safe attribute access patterns.
+
+• == None or != None (should use 'is' / 'is not')
+  ✓ OK No None equality comparisons
+
+• Attribute chains depth (fragile without guards)
+
+• dict.get(key) without default used immediately
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. NUMERIC / ARITHMETIC PITFALLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Division by variable, float equality, modulo hazards
+Silent numeric bugs propagate incorrect results or ZeroDivisionError.
+
+• Division by variable (possible ÷0)
+  ℹ Info (1 found)
+    Division operations found - check divisors
+
+• Floating-point equality (==)
+
+• Modulo by variable (verify non-zero)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. COLLECTION SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Index risks, mutation during iteration, len checks
+Collection misuse leads to IndexError or logical errors.
+
+• Index arithmetic like arr[i±1]
+
+• Mutation during iteration
+
+• len(x) comparisons
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. COMPARISON & TYPE CHECKING TRAPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: 'is' with literals, type() equality, truthiness with bools
+Prefer idiomatic Python comparisons and isinstance.
+
+• 'is' with literals
+  ✓ OK No 'is' literal comparisons
+
+• type(x) == T instead of isinstance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. ASYNC/AWAIT PITFALLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: blocking calls in async, await in loops, floating tasks
+Async bugs cause unpredictable latency and deadlocks.
+  ℹ Info (0 found)
+    Async functions found
+
+• await inside loops (performance)
+
+• Blocking calls in async def
+
+• Async error path coverage
+  ℹ Info (0 found)
+    ast-grep scan failed
+    Unable to compute async error coverage
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. ERROR HANDLING ANTI-PATTERNS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: bare except, swallowed errors, poor re-raise
+Proper exception handling simplifies debugging and recovery.
+
+• Bare except
+  🔥 CRITICAL (1 found)
+    Bare except
+    Except without class catches BaseException
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/flatted/python/flatted.py:81
+              except
+
+• except ...: pass
+
+• raise e (loses traceback)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. SECURITY VULNERABILITIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: code injection, unsafe deserialization, weak crypto, TLS off
+Security bugs expose users to attacks and data breaches.
+
+• eval/exec usage
+  ✓ OK No eval/exec detected
+
+• pickle.load/loads
+
+• yaml.load without Loader
+
+• subprocess shell=True / os.system
+  ✓ OK No shell=True / os.system detected
+
+• requests verify=False (TLS disabled)
+
+• Weak hash algorithms (md5/sha1)
+
+• Hardcoded secrets
+
+• tempfile.mktemp (insecure)
+
+• Lightweight taint analysis
+  ✓ OK No tainted sources reach dangerous sinks
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. FUNCTION & SCOPE ISSUES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: mutable defaults, many params, nested defs, returns
+Function-level bugs cause subtle state leaks and readability problems.
+
+• Mutable default arguments
+  ✓ OK No mutable default arguments
+
+• Functions with high parameter count (>6)
+
+• Nested function declarations
+
+• Missing returns heuristic
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. PARSING & TYPE CONVERSION BUGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: json.loads without try, str+num concat, int() edge cases
+Parsing bugs cause runtime exceptions and data corruption.
+
+• json.loads without try/catch
+
+• String concatenation with + adjacent to digits (possible type mix)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. CONTROL FLOW GOTCHAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: return/break in finally, nested ternary, unreachable code
+Flow pitfalls cause surprising behavior and lost exceptions.
+
+• return/break/continue inside finally
+
+• Nested conditional expressions
+
+• Unreachable code after return
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11. DEBUGGING & PRODUCTION CODE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: print, breakpoint/pdb, sensitive logs
+Debug artifacts degrade performance and leak information.
+
+• print statements
+  ✓ OK Minimal print usage
+
+• breakpoint() / pdb.set_trace()
+  ✓ OK No debugger calls
+
+• Logging sensitive data
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+12. PERFORMANCE & MEMORY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: string concat in loops, regex compile in loops, I/O in loops
+Performance anti-patterns reduce throughput and increase latency.
+
+• String concatenation in loops
+
+• re.compile inside loops
+
+• I/O heavy ops in loops
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+13. VARIABLE & SCOPE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: global/nonlocal usage, wildcard imports
+Scope issues cause hard-to-debug conflicts and side effects.
+
+• global/nonlocal statements
+
+• Wildcard imports
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+14. CODE QUALITY MARKERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: TODO, FIXME, HACK, XXX, NOTE
+Technical debt markers indicate incomplete or problematic code.
+  ✓ OK No technical debt markers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+15. REGEX & STRING SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: ReDoS, dynamic regex with input, escaping issues
+Regex bugs cause performance issues and security vulnerabilities.
+
+• Nested quantifiers (ReDoS risk)
+
+• Dynamic re.compile from variables
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+16. I/O & RESOURCE SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: open without with, missing encoding, rmtree(ignore_errors)
+I/O bugs leak resources and produce nondeterministic behavior.
+
+• open(...) without context manager
+  ✓ OK File usage appears context-managed
+
+• open() without explicit encoding
+
+• shutil.rmtree(ignore_errors=True)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+17. TYPING STRICTNESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: Any usage, type: ignore density
+Type hygiene reduces runtime errors.
+
+• 'Any' usage
+
+• type: ignore comments
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+18. PYTHON I/O & MODULE USAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: os.system, wildcard imports, dynamic import
+Prefer safer subprocess APIs and explicit imports.
+
+• os.system invocations
+
+• Dynamic imports
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+19. RESOURCE LIFECYCLE CORRELATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: File handles, subprocesses, and async tasks missing cleanup
+Unreleased resources leak descriptors, zombie processes, and pending tasks
+
+• Resource lifecycle correlation
+  ℹ Info (0 found)
+    Resource helper missing
+    Expected /c/Users/davef/.local/share/ubs/modules/helpers/resource_lifecycle_py.py
+  ✓ OK All tracked resource acquisitions have matching cleanups
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AST-GREP RULE PACK FINDINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+20. UV-POWERED EXTRA ANALYZERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Ruff linting, Bandit security, Pip-audit, Mypy, Safety, Detect-secrets
+Uses uvx when available; falls back to system tools if installed.
+
+• ruff (lint)
+  ✓ OK Ruff clean
+
+• bandit (security)
+  ℹ Info (0 found)
+    Bandit scan completed
+    See output above
+
+• pip-audit (dependencies)
+  ℹ Info (0 found)
+    pip-audit run (if available)
+    Review advisories above
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+21. DEPRECATIONS & PY3.13 MIGRATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: deprecated modules/APIs likely to break on newer Python
+Proactive remediation avoids upgrade surprises.
+
+• Deprecated modules/APIs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+22. PACKAGING & CONFIG HYGIENE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: unpinned requirements, editable installs, local paths
+Supply-chain & reproducibility safeguards.
+
+• Requirements without pins
+
+• Editable installs / local paths
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+23. NOTEBOOK HYGIENE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: large cell outputs, execution counts, trusted state
+Keeps VCS diffs clean and reproducible.
+
+• Large embedded outputs
+
+═══════════════════════════════════════════════════════════════════════════
+                    🎯 SCAN COMPLETE 🎯                                  
+═══════════════════════════════════════════════════════════════════════════
+
+Summary Statistics:
+  Files scanned:    1
+  Critical issues:  1
+  Warning issues:   0
+  Info items:       1
+
+Priority Actions:
+  🔥 FIX CRITICAL ISSUES IMMEDIATELY
+  These cause crashes, security vulnerabilities, or data corruption
+  ℹ Consider INFO suggestions
+  Code quality improvements and best practices
+
+Scan completed at: 2025-11-19T23:36:23Z
+
+Tip: Run with -v/--verbose for more code samples per finding.
+Add to pre-commit: ./ubs --ci --fail-on-warning --summary-json=.ubs-summary.json . > py-bug-scan-report.txt
+
+
+──────── cpp ────────
+
+
+╔══════════════════════════════════════════════════════════════════╗
+║  ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗  ║
+║  ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝  ║
+║  ██║   ██║██║     ██║   ██║██╔████╔██║███████║   ██║   █████╗    ║
+║  ██║   ██║██║     ██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝    ║
+║  ╚██████╔╝███████╗██║   ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗  ║
+║   ╚═════╝ ╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝  ║
+║                                      ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒             ║
+║  ██████╗ ██╗   ██╗ ██████╗           ▒▒▒▒▄██████▄▒▒▒             ║
+║  ██╔══██╗██║   ██║██╔════╝           ▒▒▒██████████▒▒             ║
+║  ██████╔╝██║   ██║██║  ███╗          ▒▒███▀▒▒▒▒▀██▌▒             ║
+║  ██╔══██╗██║   ██║██║   ██║          ▒▐██▌▒▒▒▒▒▒▒▒▒▒             ║
+║  ██████╔╝╚██████╔╝╚██████╔╝          ▒▐██▌▒▒▒▄█▄▒▄█▄             ║
+║  ╚═════╝  ╚═════╝  ╚═════╝           ▒▐██▌▒▒▒▒▀▒▒▒▀▒             ║
+║                                      ▒▒███▄▒▒▒▒▄██▌▒             ║
+║                                      ▒▒▒██████████▒▒             ║
+║                                      ▒▒▒▒▀██████▀▒▒▒             ║
+║                                      ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒             ║
+║                                                                  ║
+║  ███████╗  ██████╗   █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗  ║
+║  ██╔════╝  ██╔═══╝  ██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗ ║
+║  ███████╗  ██║      ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝ ║
+║  ╚════██║  ██║      ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗ ║
+║  ███████║  ██████╗  ██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║ ║
+║  ╚══════╝  ╚═════╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝      ║
+║                                                                  ║
+║  C/C++ module • UB hunts, RAII nudges, sanitizer hygiene         ║
+║  UBS module: cpp • AST-grep + clang heuristics for legacy        ║
+║  ASCII homage: gear/cog motif (EmojiCombos)                      ║
+║  Run standalone: modules/ubs-cpp.sh --help                       ║
+║                                                                  ║
+║  Night Owl QA                                                    ║
+║  “We see bugs before you do.”                                    ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Project:  /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan
+Started:  2025-11-19T23:26:07Z
+Files:    13 source files (cpp,cc,cxx,cppm,mpp,ixx,h,hpp,hxx,hh,ipp,tpp)
+
+✓ ast-grep available (npx -y @ast-grep/cli) - full AST analysis enabled
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. MEMORY & RAII
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: raw new/delete, C-style casts, const_cast, nullptr misuse, delete[] vs delete
+Manual memory and unsafe casts are primary sources of UB and leaks
+
+• Raw new allocations (prefer make_unique/make_shared)
+  ✓ OK No raw new detected
+
+• Manual delete (leaks/double free risk)
+  🔥 CRITICAL (11 found)
+    Manual delete/delete[] present
+    Prefer RAII via smart pointers or containers
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/metadata.cc:291
+          delete baton->input;
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/metadata.cc:292
+          delete baton;
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/pipeline.cc:1362
+          delete baton->input;
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/pipeline.cc:1363
+          delete baton->boolean;
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/pipeline.cc:1365
+            delete composite->input;
+
+• C-style casts
+
+• const_cast/reinterpret_cast (dangerous)
+  ⚠ Warning (39 found)
+    Dangerous casts present
+    Verify lifetime/aliasing
+
+• NULL used instead of nullptr
+  ℹ Info (3 found)
+    Use nullptr in C++ code
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. EXCEPTIONS & ERROR HANDLING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: throw in destructor, catch by value, deprecated specs, generic throws
+Exception safety errors cause terminate(), leaks, and slicing
+
+• Throw in destructor
+  ✓ OK No throws in destructors
+
+• Catch by value (prefer const&)
+
+• Deprecated dynamic exception specification
+
+• Generic throw types
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. CONCURRENCY & ATOMICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: manual lock/unlock, async without policy, weak memory orders
+Concurrency bugs are catastrophic under load and hard to reproduce
+
+• Manual mutex lock/unlock (prefer RAII)
+  ✓ OK No manual lock/unlock
+
+• std::async without explicit launch policy
+
+• Weak memory-order usage
+
+• Async error path coverage
+  ✓ OK No std::async usage detected
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. MODERNIZATION (C++20+)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: using-namespace in headers, removed types, bind, nullptr, modules
+Keeps codebase aligned with modern idioms & readability
+
+• 'using namespace std;' especially in headers
+
+• Removed/legacy types: std::auto_ptr
+
+• std::bind (prefer lambdas)
+
+• Modules/global module fragment presence
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. POINTER & LIFETIME HAZARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: string_view from temporary, return local ref, move-of-const
+Lifetime bugs compile fine and explode at runtime
+
+• std::string_view from temporary
+
+• Returning reference/value risks (heuristic)
+
+• std::move on const
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. NUMERIC & ARITHMETIC PITFALLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: division by variable, integer overflow-prone code, fp equality
+Silent overflows/fp comparisons trigger logic bugs and UB
+
+• Division by variable (check non-zero)
+  ⚠ Warning (45 found)
+    Division by variable - add guards
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/common.cc:1
+      // Copyright 2013 Lovell Fuller and others.
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/common.cc:2
+      // SPDX-License-Identifier: Apache-2.0
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/common.cc:10
+      #include <mutex>  // NOLINT(build/c++11)
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/common.cc:13
+      #include <vips/vips8>
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/common.cc:21
+        // Convenience methods to access the attributes of a Napi::Object
+
+• Floating-point equality checks
+
+• Modulo by variable
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. UNDEFINED BEHAVIOR RISK ZONE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: dangerous casts, unsafe C APIs, dangling, delete mismatch
+UB can pass tests and still crash in production
+
+• Dangerous functions (strcpy/gets/scanf/sprintf)
+  ✓ OK No unsafe C APIs found
+
+• reinterpret_cast/const_cast occurrences
+  ⚠ Warning (39 found)
+    Many low-level casts - scrutinize for UB
+
+• delete vs delete[] mismatch (heuristic)
+  ℹ Info (11 found)
+    Verify delete/delete[] matches allocation form
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. HEADER & INCLUDE HYGIENE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: using-namespace in headers, C headers, excessive includes, pragma once
+Header hygiene prevents ODR violations and compile-time blow-ups
+
+• Header guards or #pragma once missing (heuristic)
+
+• C headers included in C++
+  ℹ Info (1 found)
+    Prefer <cstdio>/<cstdlib>/<cstring>/<cmath>
+
+• using namespace std in headers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. STL & ALGORITHMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: erase invalidation, std::move misuse, std::bind, raw loops
+Make idiomatic use of algorithms to reduce bugs
+
+• erase while iterating (invalidates iterators)
+
+• Manual loops where algorithm fits (heuristic)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. STRING & I/O SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: printf-family, dangerous scanf formats, fmt migration
+Type-safety and format correctness prevent latent crashes
+
+• printf/scanf/sprintf family usage
+  ℹ Info (1 found)
+    C-format APIs in C++
+    Prefer std::format/fmt for type-safe formatting
+      /c/Users/davef/Documents/Projects/Claude/Vibe Coding/agwakwagan/agwakwagan/node_modules/sharp/src/utilities.cc:99
+        std::snprintf(semver, sizeof(semver), "%d.%d.%d", vips_version(0), vips_version(1), vips_version(2));
+
+• std::endl usage
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11. MACROS & PREPROCESSOR TRAPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: min/max macros, debug leftovers, macro side effects
+Macros can silently rewrite code and cause ODR/symbol issues
+
+• min/max macro definitions
+
+• DEBUG/TRACE macros enabled (heuristic)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+12. CMAKE & BUILD HYGIENE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: non-C++20 standard settings, missing warnings, no sanitizers, RTTI/exceptions flags
+Build settings are part of correctness and performance
+
+• CMAKE_CXX_STANDARD and target_compile_features
+  ℹ Info (1 found)
+    CMake lacks explicit C++ standard settings
+    Set CMAKE_CXX_STANDARD 20 and/or target_compile_features(... cxx_std_20)
+
+• Warnings enabled (-Wall -Wextra -Wpedantic)
+  ℹ Info (1 found)
+    No common warnings in CMake found
+
+• Sanitizers configured (ASan/UBSan)
+  ℹ Info (1 found)
+    No sanitizers detected in CMake
+
+• Exceptions/RTTI disabled?
+
+• Position Independent Code and LTO (optional)
+  ℹ Info (1 found)
+    PIC not detected (fine for static, check for shared libs)
+  ℹ Info (1 found)
+    LTO not detected (optional)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+13. CODE QUALITY MARKERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: TODO, FIXME, HACK, XXX comments
+Technical debt markers indicate areas needing attention
+  ✓ OK No technical debt markers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+14. PERFORMANCE & ALLOCATION PRESSURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: tight-loop string concatenation, many small allocations, I/O in loops
+Performance bugs degrade latency and throughput
+
+• String concatenation in tight loops (+=)
+
+• I/O in loops (heuristic)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+15. TEST/DEBUG LEFTOVERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: assert/abort left enabled, debug prints
+Debug artifacts can affect performance and user experience
+
+• assert/abort present
+
+• Debug prints (std::cout/cerr)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+16. RESOURCE LIFECYCLE CORRELATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▓▓▓ Detects: std::thread spawn w/o join, malloc/calloc without free, fopen without fclose
+Manual resources must be paired with cleanup to avoid leaks and crashes
+
+• Resource lifecycle correlation
+  ✓ OK All tracked resource acquisitions have matching cleanups
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AST-GREP RULE PACK FINDINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠ ast-grep scan subcommand unavailable; rule-pack mode skipped.
+
+═══════════════════════════════════════════════════════════════════════════
+                    🎯 SCAN COMPLETE 🎯                                  
+═══════════════════════════════════════════════════════════════════════════
+
+Summary Statistics:
+  Files scanned:    13
+  Critical issues:  11
+  Warning issues:   123
+  Info items:       21
+
+Priority Actions:
+  🔥 FIX CRITICAL ISSUES IMMEDIATELY
+  These cause crashes, security vulnerabilities, or data corruption
+  ⚠ Review and fix WARNING items
+  These cause bugs, performance issues, or maintenance problems
+  ℹ Consider INFO suggestions
+  Code quality improvements and best practices
+
+Scan completed at: 2025-11-19T23:33:12Z
+
+Tip: Run with -v/--verbose for more code samples per finding.
+Add to pre-commit: ./ubs --ci --fail-on-warning . > cpp-scan-report.txt
+

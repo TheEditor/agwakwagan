@@ -6,6 +6,7 @@ import { Column as ColumnType, Card as CardType } from '@/types/board';
 import { Card } from './Card';
 import { AddCardForm } from './AddCardForm';
 import { DeleteColumnModal } from './DeleteColumnModal';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 
 const ColumnContainer = styled.div<{ isDragOver: boolean }>`
   flex: 0 0 320px;
@@ -259,6 +260,7 @@ export function Column({
   const [editTitle, setEditTitle] = useState(column.title);
   const [isHovered, setIsHovered] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteCardId, setDeleteCardId] = useState<string | null>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -408,11 +410,7 @@ export function Column({
               onDragEnd={onCardDragEnd}
               isEditing={editingCardId === card.id}
               onEdit={() => onEditCard?.(card.id)}
-              onDelete={() => {
-                if (window.confirm(`Delete card "${card.title}"?`)) {
-                  onDeleteCard?.(card.id);
-                }
-              }}
+              onDelete={() => setDeleteCardId(card.id)}
               onUpdate={onUpdateCard}
               onCancelEdit={onCancelEditCard}
             />
@@ -448,6 +446,22 @@ export function Column({
             setShowDeleteModal(false);
           }}
           onCancel={() => setShowDeleteModal(false)}
+        />
+      )}
+
+      {deleteCardId && (
+        <ConfirmDialog
+          isOpen={!!deleteCardId}
+          title="Delete Card"
+          message={`Delete card "${cards.find(c => c.id === deleteCardId)?.title || ''}"?`}
+          confirmText="Delete"
+          cancelText="Cancel"
+          isDanger={true}
+          onConfirm={() => {
+            onDeleteCard?.(deleteCardId);
+            setDeleteCardId(null);
+          }}
+          onCancel={() => setDeleteCardId(null)}
         />
       )}
     </ColumnContainer>

@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
+import { useToast } from '@/hooks/useToast';
 
 const Overlay = styled.div`
   position: fixed;
@@ -180,6 +181,8 @@ interface SettingsModalProps {
 }
 
 export function SettingsModal({ boardId, onClose }: SettingsModalProps) {
+  const { error: showError } = useToast();
+
   // Handle ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -259,7 +262,7 @@ export function SettingsModal({ boardId, onClose }: SettingsModalProps) {
                         localStorage.setItem(`agwakwagan-${boardId}`, content);
                         window.location.reload();
                       } catch (err) {
-                        alert('Invalid board file. Please select a valid JSON export.');
+                        showError('Invalid board file. Please select a valid JSON export.');
                       }
                     };
                     reader.readAsText(file);

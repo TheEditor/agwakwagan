@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { BoardSummary, DataSource } from "@/types/datasource";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { useToast } from "@/hooks/useToast";
 
 interface BoardSelectorProps {
   dataSource: DataSource;
@@ -27,6 +29,8 @@ export function BoardSelector({
   const [boards, setBoards] = useState<BoardSummary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [deleteBoardId, setDeleteBoardId] = useState<string | null>(null);
+  const { error: showError } = useToast();
 
   useEffect(() => {
     loadBoards();
@@ -53,22 +57,25 @@ export function BoardSelector({
 
   const handleDeleteBoard = async (boardId: string, e: React.MouseEvent) => {
     e.stopPropagation();
+    setDeleteBoardId(boardId);
+  };
 
-    if (!confirm("Are you sure you want to delete this board?")) {
-      return;
-    }
+  const confirmDeleteBoard = async () => {
+    if (!deleteBoardId) return;
 
     try {
       if (dataSource.deleteBoard) {
-        await dataSource.deleteBoard(boardId);
+        await dataSource.deleteBoard(deleteBoardId);
         await loadBoards();
         if (onDeleteBoard) {
-          onDeleteBoard(boardId);
+          onDeleteBoard(deleteBoardId);
         }
       }
     } catch (error) {
       console.error("Failed to delete board:", error);
-      alert("Failed to delete board");
+      showError("Failed to delete board");
+    } finally {
+      setDeleteBoardId(null);
     }
   };
 
@@ -160,6 +167,19 @@ export function BoardSelector({
             </div>
           )}
         </div>
+      )}
+
+      {deleteBoardId && (
+        <ConfirmDialog
+          isOpen={!!deleteBoardId}
+          title="Delete Board"
+          message="Are you sure you want to delete this board? This action cannot be undone."
+          confirmText="Delete"
+          cancelText="Cancel"
+          isDanger={true}
+          onConfirm={confirmDeleteBoard}
+          onCancel={() => setDeleteBoardId(null)}
+        />
       )}
     </div>
   );
