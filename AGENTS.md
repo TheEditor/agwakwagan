@@ -17,11 +17,13 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 <!-- OPENSPEC:END -->
 
-## Issue Tracking with bd (beads)
+## Issue Tracking with br (beads_rust)
 
-**IMPORTANT**: This project uses **bd (beads)** for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods.
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
 
-### Why bd?
+**IMPORTANT**: This project uses **br (beads_rust)** for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods.
+
+### Why br?
 
 - Dependency-aware: Track blockers and relationships between issues
 - Git-friendly: Auto-syncs to JSONL for version control
@@ -32,36 +34,38 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 **Check for ready work:**
 ```bash
-bd ready --json
+br ready --json
 ```
 
 **Create new issues:**
 ```bash
-bd create "Issue title" -t bug|feature|task -p 0-4 --json
-bd create "Issue title" -p 1 --deps discovered-from:bd-123 --json
+br create "Issue title" -t bug|feature|task -p 0-4 --json
+br create "Issue title" -p 1 --deps discovered-from:br-123 --json
 ```
 
 **Claim and update:**
 ```bash
-bd update bd-42 --status in_progress --json
-bd update bd-42 --priority 1 --json
+br update br-42 --status in_progress --json
+br update br-42 --priority 1 --json
 ```
 
 **Complete work:**
 ```bash
-bd close bd-42 --reason "Completed" --json
+br close br-42 --reason "Completed" --json
 ```
 
 **Search and filter:**
 ```bash
-bd list --status open --priority 1 --json
-bd list --label-any urgent,critical --json
-bd show <id> --json
+br list --status open --priority 1 --json
+br list --label-any urgent,critical --json
+br show <id> --json
 ```
 
 **Sync (CRITICAL at end of session!):**
 ```bash
-bd sync  # Force immediate export/commit/push
+br sync --flush-only  # Force immediate export/commit/push
+git add .beads/
+git commit -m "sync beads"
 ```
 
 ### Issue Types
@@ -82,17 +86,17 @@ bd sync  # Force immediate export/commit/push
 
 ### Workflow for AI Agents
 
-1. **Check ready work**: `bd ready` shows unblocked issues
-2. **Claim your task**: `bd update <id> --status in_progress`
+1. **Check ready work**: `br ready` shows unblocked issues
+2. **Claim your task**: `br update <id> --status in_progress`
 3. **Work on it**: Implement, test, document
 4. **Discover new work?** Create linked issue:
-   - `bd create "Found bug" -p 1 --deps discovered-from:<parent-id>`
-5. **Complete**: `bd close <id> --reason "Done"`
+   - `br create "Found bug" -p 1 --deps discovered-from:<parent-id>`
+5. **Complete**: `br close <id> --reason "Done"`
 6. **Commit together**: Always commit the `.beads/issues.jsonl` file together with the code changes so issue state stays in sync with code state
 
 ### Auto-Sync
 
-bd automatically syncs with git:
+br automatically syncs with git:
 - Exports to `.beads/issues.jsonl` after changes (5s debounce)
 - Imports from JSONL when newer (e.g., after `git pull`)
 - No manual export/import needed!
@@ -121,11 +125,11 @@ history/
 
 ### What's New?
 
-Before starting work run `bd info --whats-new` to see agent-relevant changes from recent versions:
+Before starting work run `br info --whats-new` to see agent-relevant changes from recent versions:
 
 ```bash
-bd info --whats-new          # Human-readable output
-bd info --whats-new --json   # Machine-readable output
+br info --whats-new          # Human-readable output
+br info --whats-new --json   # Machine-readable output
 ```
 
 This shows the last 3 versions with workflow-impacting changes, avoiding the need to re-read all documentation. Examples:
@@ -134,7 +138,7 @@ This shows the last 3 versions with workflow-impacting changes, avoiding the nee
 - Performance improvements and bug fixes
 - Integration features (MCP, Agent Mail, git hooks)
 
-**Why this matters:** bd releases weekly with major versions. This command helps you quickly understand what changed. It's possible the new info will conflict with the command descriptions elsewhere in this file. Make note of it before you start any work.
+**Why this matters:** br releases weekly with major versions. This command helps you quickly understand what changed. It's possible the new info will conflict with the command descriptions elsewhere in this file. Make note of it before you start any work.
 
 **Benefits:**
 - ✅ Clean repository root
@@ -145,10 +149,10 @@ This shows the last 3 versions with workflow-impacting changes, avoiding the nee
 
 ### Important Rules
 
-- ✅ Use bd for ALL task tracking
+- ✅ Use br for ALL task tracking
 - ✅ Always use `--json` flag for programmatic use
 - ✅ Link discovered work with `discovered-from` dependencies
-- ✅ Check `bd ready` before asking "what should I work on?"
+- ✅ Check `br ready` before asking "what should I work on?"
 - ✅ Store AI planning docs in `history/` directory
 - ❌ Do NOT create markdown TODO lists
 - ❌ Do NOT use external issue trackers
@@ -179,22 +183,29 @@ For more details, see README.md and QUICKSTART.md.
 
 ```bash
 # 1. File remaining work
-bd create "Add integration tests for sync" -t task -p 2 --json
+br create "Add integration tests for sync" -t task -p 2 --json
 
 # 2. Run quality gates (only if code changes were made)
 go test -short ./...
 golangci-lint run ./...
 
 # 3. Close finished issues
-bd close bd-42 bd-43 --reason "Completed" --json
+br close br-42 br-43 --reason "Completed" --json
 
 # 4. Sync carefully - example workflow (adapt as needed):
 git pull --rebase
 # If conflicts in .beads/issues.jsonl, resolve thoughtfully:
+
 #   - git checkout --theirs .beads/issues.jsonl (accept remote)
-#   - bd import -i .beads/issues.jsonl (re-import)
+
+#   - br sync --import-only -i .beads/issues.jsonl (re-import)
+
+git add .beads/
+git commit -m "sync beads"
 #   - Or manual merge, then import
-bd sync  # Export/import/verify
+br sync --flush-only  # Export/import/verify
+git add .beads/
+git commit -m "sync beads"
 git push
 # Repeat pull/push if needed until clean
 
@@ -202,8 +213,8 @@ git push
 git status
 
 # 6. Choose next work
-bd ready --json
-bd show bd-44 --json
+br ready --json
+br show br-44 --json
 ```
 
 **Then provide the user with:**
@@ -212,4 +223,3 @@ bd show bd-44 --json
 - What issues were filed for follow-up
 - Status of quality gates (all passing / issues filed)
 - Recommended prompt for next session
-

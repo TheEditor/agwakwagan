@@ -2,18 +2,22 @@
 
 ## Beads Issue Setup
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ```bash
 # Create parent issue
-bd create "Add keyboard shortcuts and UI hints to Agwakwagan" -p 3 --json
+br create "Add keyboard shortcuts and UI hints to Agwakwagan" -p 3 --json
 # Note parent ID (e.g., agwa-p5q6)
 
 # Create child issues
-bd create "Add tooltips to column action icons" -p 3 --parent agwa-p5q6 --json
-bd create "Add F2 keyboard hint to UI" -p 3 --parent agwa-p5q6 --json  
-bd create "Add Delete key shortcut for columns" -p 3 --parent agwa-p5q6 --json
+br create "Add tooltips to column action icons" -p 3 --parent agwa-p5q6 --json
+br create "Add F2 keyboard hint to UI" -p 3 --parent agwa-p5q6 --json  
+br create "Add Delete key shortcut for columns" -p 3 --parent agwa-p5q6 --json
 
 # Claim all (note IDs, e.g., agwa-r7s8, agwa-t9u0, agwa-v1w2)
-bd claim agwa-r7s8 agwa-t9u0 agwa-v1w2 --json
+br update agwa-r7s8 --status in_progress --json
+br update agwa-t9u0 --status in_progress --json
+br update agwa-v1w2 --status in_progress --json
 ```
 
 ---
@@ -334,28 +338,28 @@ kbd {
 
 ```bash
 # After Task 1
-git commit -m "feat: Add tooltips to column action icons (bd:agwa-r7s8)
+git commit -m "feat: Add tooltips to column action icons (br:agwa-r7s8)
 
 - Edit icon shows 'Edit column name (F2)'
 - Delete icon shows 'Delete column (Del)'
 - Better discoverability for shortcuts"
 
 # After Task 2
-git commit -m "feat: Add keyboard shortcuts hint to UI (bd:agwa-t9u0)
+git commit -m "feat: Add keyboard shortcuts hint to UI (br:agwa-t9u0)
 
 - Persistent hint bar showing available shortcuts
 - Can be dismissed by user
 - Hidden on mobile devices"
 
 # After Task 3
-git commit -m "feat: Add Delete key shortcut for columns (bd:agwa-v1w2)
+git commit -m "feat: Add Delete key shortcut for columns (br:agwa-v1w2)
 
 - Del or Backspace triggers delete modal
 - Only works on focused column
 - Confirmation still required"
 
 # Close issues
-bd close agwa-r7s8 agwa-t9u0 agwa-v1w2 --json
+br close agwa-r7s8 agwa-t9u0 agwa-v1w2 --json
 ```
 
 ---

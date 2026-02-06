@@ -2,17 +2,20 @@
 
 ## Beads Issue Setup
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ```bash
 # Create parent issue
-bd create "Add column editing UX improvements" -p 3 --json
+br create "Add column editing UX improvements" -p 3 --json
 # Note parent ID (e.g., agwa-a1b2)
 
 # Create child issues
-bd create "Add edit icon to columns instead of click-to-edit" -p 3 --parent agwa-a1b2 --json
-bd create "Add F2 keyboard shortcut for column editing" -p 3 --parent agwa-a1b2 --json
+br create "Add edit icon to columns instead of click-to-edit" -p 3 --parent agwa-a1b2 --json
+br create "Add F2 keyboard shortcut for column editing" -p 3 --parent agwa-a1b2 --json
 
 # Claim both (note IDs, e.g., agwa-c3d4, agwa-e5f6)
-bd claim agwa-c3d4 agwa-e5f6 --json
+br update agwa-c3d4 --status in_progress --json
+br update agwa-e5f6 --status in_progress --json
 ```
 
 ---
@@ -195,22 +198,22 @@ const handleGlobalKeyDown = (e: KeyboardEvent) => {
 
 ```bash
 # After Task 1
-git commit -m "feat: Add edit icon button to columns (bd:agwa-c3d4)
+git commit -m "feat: Add edit icon button to columns (br:agwa-c3d4)
 
 - Replace click-to-edit with explicit edit icon
 - Icon appears on hover (always visible on mobile)
 - Improves discoverability"
 
 # After Task 2
-git commit -m "feat: Add F2 keyboard shortcut for column editing (bd:agwa-e5f6)
+git commit -m "feat: Add F2 keyboard shortcut for column editing (br:agwa-e5f6)
 
 - F2 triggers edit mode on focused column
 - Columns now keyboard navigable (tabindex)
 - Standard keyboard pattern for power users"
 
 # Close issues
-bd close agwa-c3d4 --json
-bd close agwa-e5f6 --json
+br close agwa-c3d4 --json
+br close agwa-e5f6 --json
 ```
 
 ---

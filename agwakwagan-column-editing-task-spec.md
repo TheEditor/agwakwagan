@@ -2,16 +2,18 @@
 
 ## Beads Issue Setup
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ```bash
 # Create issue
-bd create "Add inline column name editing to Agwakwagan" -p 2 --json
+br create "Add inline column name editing to Agwakwagan" -p 2 --json
 # Note the ID (e.g., agwa-z3w4)
 
 # Claim it
-bd claim agwa-z3w4 --json
+br update agwa-z3w4 --status in_progress --json
 
 # Mark in progress when starting
-bd update agwa-z3w4 --status in_progress --json
+br update agwa-z3w4 --status in_progress --json
 ```
 
 ---
@@ -234,7 +236,7 @@ const handleCancel = () => {
 ## Commit Message
 
 ```bash
-git commit -m "feat: Add inline column name editing (bd:agwa-z3w4)
+git commit -m "feat: Add inline column name editing (br:agwa-z3w4)
 
 - Click column title to edit
 - Enter to save, Escape to cancel  
@@ -242,7 +244,7 @@ git commit -m "feat: Add inline column name editing (bd:agwa-z3w4)
 - Persists to localStorage"
 
 # Close issue
-bd close agwa-z3w4 --json
+br close agwa-z3w4 --json
 ```
 
 ---

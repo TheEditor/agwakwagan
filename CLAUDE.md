@@ -17,4 +17,4 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 <!-- OPENSPEC:END -->
 
-**Note**: This project uses [bd (beads)](https://github.com/steveyegge/beads) for issue tracking. Use `bd` commands instead of markdown TODOs. See AGENTS.md for workflow details.
+**Note**: This project uses [br (beads_rust)](https://github.com/Dicklesworthstone/beads_rust) for issue tracking. Use `br` commands instead of markdown TODOs. See AGENTS.md for workflow details.

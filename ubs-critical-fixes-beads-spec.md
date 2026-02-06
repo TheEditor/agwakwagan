@@ -1,5 +1,7 @@
 # UBS Critical Fixes - Beads Task Specification
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 **Project:** Agwakwagan  
 **Source:** UBS scan results 2025-11-19  
 **Priority:** High - 11 critical issues identified  
@@ -307,6 +309,8 @@ Execute in this sequence:
 ---
 
 ## Import into Beads
+
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
 
 Run these commands from project root:
 

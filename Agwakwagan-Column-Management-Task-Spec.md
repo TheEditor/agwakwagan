@@ -2,18 +2,22 @@
 
 ## Beads Issue Setup
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ```bash
 # Create parent issue
-bd create "Add column management (add/delete) to Agwakwagan" -p 2 --json
+br create "Add column management (add/delete) to Agwakwagan" -p 2 --json
 # Note parent ID (e.g., agwa-g7h8)
 
 # Create child issues
-bd create "Implement add new column functionality" -p 2 --parent agwa-g7h8 --json
-bd create "Implement delete column with card handling" -p 2 --parent agwa-g7h8 --json
-bd create "Update API endpoints for column operations" -p 3 --parent agwa-g7h8 --json
+br create "Implement add new column functionality" -p 2 --parent agwa-g7h8 --json
+br create "Implement delete column with card handling" -p 2 --parent agwa-g7h8 --json
+br create "Update API endpoints for column operations" -p 3 --parent agwa-g7h8 --json
 
 # Claim all (note IDs, e.g., agwa-i9j0, agwa-k1l2, agwa-m3n4)
-bd claim agwa-i9j0 agwa-k1l2 agwa-m3n4 --json
+br update agwa-i9j0 --status in_progress --json
+br update agwa-k1l2 --status in_progress --json
+br update agwa-m3n4 --status in_progress --json
 ```
 
 ---
@@ -472,14 +476,14 @@ export async function DELETE(request: NextRequest) {
 
 ```bash
 # After Add Column
-git commit -m "feat: Add new column creation (bd:agwa-i9j0)
+git commit -m "feat: Add new column creation (br:agwa-i9j0)
 
 - Add Column button after last column
 - Inline form for column name
 - Persists to localStorage"
 
 # After Delete Column
-git commit -m "feat: Add column deletion with card handling (bd:agwa-k1l2)
+git commit -m "feat: Add column deletion with card handling (br:agwa-k1l2)
 
 - Delete icon on column hover
 - Confirmation modal with options
@@ -487,14 +491,14 @@ git commit -m "feat: Add column deletion with card handling (bd:agwa-k1l2)
 - Prevent deleting last column"
 
 # After API Updates
-git commit -m "feat: Add column API endpoints (bd:agwa-m3n4)
+git commit -m "feat: Add column API endpoints (br:agwa-m3n4)
 
 - POST /api/boards/:id/columns
 - DELETE /api/boards/:id/columns/:id
 - Handle card movement via query param"
 
 # Close issues
-bd close agwa-i9j0 agwa-k1l2 agwa-m3n4 --json
+br close agwa-i9j0 agwa-k1l2 agwa-m3n4 --json
 ```
 
 ---

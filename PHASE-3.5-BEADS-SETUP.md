@@ -1,5 +1,7 @@
 # Phase 3.5: UI Redesign - Beads Issue Structure
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 **Status:** ✅ All 7 issues created with dependency chain
 **Created:** November 17, 2025
 **Total Estimated Time:** 6-8 hours
@@ -188,7 +190,7 @@ kanban-jyb (Testing & Polish) [P3]
 2. Update app/globals.css with exact color specs
 3. Import Google Fonts (Crimson Pro + Fira Code)
 4. Add spacing/shadow/animation variables
-5. Run: `bd update kanban-o46 --status done --json`
+5. Run: `br update kanban-o46 --status done --json`
 6. Commit: `fix(ui): Implement Ozhiaki design system - closes kanban-o46`
 
 ### Phase 2: Drag & Drop (kanban-6n6)
@@ -198,7 +200,7 @@ kanban-jyb (Testing & Polish) [P3]
 4. Update KanbanBoard.tsx orchestration
 5. Remove @hello-pangea/dnd imports
 6. Test drag functionality
-7. Run: `bd update kanban-6n6 --status done --json`
+7. Run: `br update kanban-6n6 --status done --json`
 8. Commit: `feat(dnd): Implement robust drag-and-drop system - closes kanban-6n6`
 
 ### Phase 3: Board Component (kanban-8l9)
@@ -206,7 +208,7 @@ kanban-jyb (Testing & Polish) [P3]
 2. Add texture overlay
 3. Add Ojibwe syllabics decoration
 4. Implement animations
-5. Run: `bd update kanban-8l9 --status done --json`
+5. Run: `br update kanban-8l9 --status done --json`
 6. Commit: `refactor(board): Implement Ozhiaki board design - closes kanban-8l9`
 
 ### Phase 4: Column Component (kanban-qcl)
@@ -214,7 +216,7 @@ kanban-jyb (Testing & Polish) [P3]
 2. Add drop zone visual feedback
 3. Implement drop indicator
 4. Add card count badge
-5. Run: `bd update kanban-qcl --status done --json`
+5. Run: `br update kanban-qcl --status done --json`
 6. Commit: `feat(column): Implement column with drop zones - closes kanban-qcl`
 
 ### Phase 5: Card Component (kanban-eud)
@@ -222,7 +224,7 @@ kanban-jyb (Testing & Polish) [P3]
 2. Add maroon border and magnetic cursor effect
 3. Add external ID indicator
 4. Implement custom drag ghost
-5. Run: `bd update kanban-eud --status done --json`
+5. Run: `br update kanban-eud --status done --json`
 6. Commit: `feat(card): Redesign cards with Ozhiaki styling - closes kanban-eud`
 
 ### Phase 6: Accessibility (kanban-3qf)
@@ -230,7 +232,7 @@ kanban-jyb (Testing & Polish) [P3]
 2. Add ARIA labels and roles
 3. Implement focus management
 4. Test with screen reader
-5. Run: `bd update kanban-3qf --status done --json`
+5. Run: `br update kanban-3qf --status done --json`
 6. Commit: `feat(a11y): Add keyboard navigation and ARIA - closes kanban-3qf`
 
 ### Phase 7: Testing (kanban-jyb)
@@ -239,7 +241,7 @@ kanban-jyb (Testing & Polish) [P3]
 3. Performance testing
 4. Accessibility audit
 5. Browser testing
-6. Run: `bd update kanban-jyb --status done --json`
+6. Run: `br update kanban-jyb --status done --json`
 7. Commit: `test(ui): Complete UI testing and polish - closes kanban-jyb`
 
 ---
@@ -264,22 +266,22 @@ Phase 3.5 is complete when:
 
 **Update issue to done:**
 ```bash
-bd update kanban-XXXX --status done --json
+br update kanban-XXXX --status done --json
 ```
 
 **List all Phase 3.5 issues:**
 ```bash
-bd list | grep "Implement Ozhiaki\|Implement robust\|Refactor Board\|Implement Column\|Redesign Card\|Add comprehensive\|Test UI"
+br list | grep "Implement Ozhiaki\|Implement robust\|Refactor Board\|Implement Column\|Redesign Card\|Add comprehensive\|Test UI"
 ```
 
 **Show issue dependencies:**
 ```bash
-bd show kanban-o46 --json
+br show kanban-o46 --json
 ```
 
 **Claim an issue:**
 ```bash
-bd claim kanban-XXXX --json
+br update kanban-XXXX --status in_progress --json
 ```
 
 ---
@@ -289,7 +291,7 @@ bd claim kanban-XXXX --json
 - All issues are P1 except accessibility (P2) and testing (P3)
 - Issues must be completed in dependency order
 - Each commit message should reference the issue ID
-- Use `bd update [id] --status done --json` before committing
+- Use `br update [id] --status done --json` before committing
 - Reference the four specification files for implementation details:
   - `agwakwagan-phase-3.5-ui-redesign.md` - Main spec
   - `agwakwagan-ui-redesign-spec.md` - Design system details

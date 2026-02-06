@@ -386,6 +386,8 @@ Execute in this sequence:
 
 ## Import into Beads
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ```bash
 # Navigate to project root
 cd /c/Users/davef/Documents/Projects/Claude/Vibe\ Coding/agwakwagan/agwakwagan
@@ -399,6 +401,7 @@ beads create \
 # Get epic ID
 beads list --filter "Verified UBS" --format json | jq -r '.[0].id'
 # Or manually: beads list | grep "Verified UBS"
+
 
 # Create Task 1 (replace <EPIC_ID> with actual ID)
 beads create \

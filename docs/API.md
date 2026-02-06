@@ -454,11 +454,15 @@ Column names are automatically derived from titles (lowercase, spaces as hyphens
 
 ### With Beads
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ```bash
 # Create a kanban card from Beads issue
-bd create "Implement auth" --link-to-kanban
+
+br create "Implement auth" --link-to-kanban
 
 # Move kanban card when Beads issue changes
+
 # (Custom integration needed)
 ```
 

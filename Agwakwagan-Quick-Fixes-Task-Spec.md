@@ -2,22 +2,25 @@
 
 ## Beads Issue Setup
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ### Create Parent Issue
 ```bash
-bd create "Fix broken UI interactions in Agwakwagan" -p 2 --json
+br create "Fix broken UI interactions in Agwakwagan" -p 2 --json
 # Note the parent ID (e.g., agwa-x1y2)
 ```
 
 ### Create Child Issues
 ```bash
 # Issue 1: Settings Button
-bd create "Settings button has no onClick handler" -p 2 --parent agwa-x1y2 --json
+br create "Settings button has no onClick handler" -p 2 --parent agwa-x1y2 --json
 
 # Issue 2: Edit Icon  
-bd create "Card edit icon doesn't trigger edit mode" -p 2 --parent agwa-x1y2 --json
+br create "Card edit icon doesn't trigger edit mode" -p 2 --parent agwa-x1y2 --json
 
 # Claim both
-bd claim agwa-xxxx agwa-yyyy --json
+br update agwa-xxxx --status in_progress --json
+br update agwa-yyyy --status in_progress --json
 ```
 
 ---
@@ -129,14 +132,14 @@ const { setEditingCardId } = useBoard();
 ### Commit Pattern
 ```bash
 # After Task 1
-git commit -m "fix: Add onClick handler to Settings button (bd:agwa-xxxx)"
+git commit -m "fix: Add onClick handler to Settings button (br:agwa-xxxx)"
 
 # After Task 2  
-git commit -m "fix: Wire edit icon to card edit mode (bd:agwa-yyyy)"
+git commit -m "fix: Wire edit icon to card edit mode (br:agwa-yyyy)"
 
 # Close issues
-bd close agwa-xxxx --json
-bd close agwa-yyyy --json
+br close agwa-xxxx --json
+br close agwa-yyyy --json
 ```
 
 ---

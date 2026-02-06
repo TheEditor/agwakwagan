@@ -1,5 +1,7 @@
 # Beads Workflow Requirements for AI Assistants
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 ## Executive Summary
 
 This document explains why the Beads issue tracking requirement was missed during planning and provides recommendations to prevent this oversight in future projects.
@@ -13,7 +15,7 @@ This document explains why the Beads issue tracking requirement was missed durin
 **File That Contained This:** `agwakwagan-phase-3.5-ui-redesign.md` lines 522-530
 
 **What Should Have Happened:**
-1. Create 7 Beads issues (3.5.1 through 3.5.7) using `bd create` commands
+1. Create 7 Beads issues (3.5.1 through 3.5.7) using `br create` commands
 2. Establish dependency chain (3.5.1 → 3.5.2 → 3.5.3 → ... → 3.5.7)
 3. Record issue IDs for use in commit messages
 4. Plan implementation phases around these issue IDs
@@ -31,7 +33,7 @@ This document explains why the Beads issue tracking requirement was missed durin
 ### 1. Didn't Prioritize CLAUDE.md Instructions
 
 The CLAUDE.md file explicitly states:
-> "This project uses bd (beads) for issue tracking. Use `bd` commands instead of markdown TODOs."
+> "This project uses br (beads_rust) for issue tracking. Use `br` commands instead of markdown TODOs."
 
 **Why Missed:**
 - Treated this as informational context rather than a mandatory workflow requirement
@@ -41,7 +43,7 @@ The CLAUDE.md file explicitly states:
 ### 2. Overlooked the Explicit Task Structure Section
 
 The spec file has an entire section "Task Structure for Beads" (lines 29-501) with:
-- 7 specific `bd create` commands
+- 7 specific `br create` commands
 - Dependency declarations (--depends-on flags)
 - Explicit issue IDs to use in commits
 - A dependencies graph diagram
@@ -49,7 +51,7 @@ The spec file has an entire section "Task Structure for Beads" (lines 29-501) wi
 
 **Why Missed:**
 - Read the section but categorized it as "reference material"
-- Didn't recognize `bd create` commands as mandatory prerequisites
+- Didn't recognize `br create` commands as mandatory prerequisites
 - Pattern-matched to typical project planning (phases → implementation)
 
 ### 3. Default Pattern-Matching Behavior
@@ -70,7 +72,7 @@ Lines 522-530 contain a "Notes for AI Assistant" section with ALL CAPS emphasis:
 ```
 **IMPORTANT**: Create all Beads issues BEFORE starting any implementation:
 
-1. Run all `bd create` commands first
+1. Run all `br create` commands first
 2. Note the issue IDs for dependencies
 3. Claim issues one at a time
 4. Complete in dependency order
@@ -96,12 +98,13 @@ Add a prominent section at the very beginning of CLAUDE.md:
 <!-- WORKFLOW:START -->
 # CRITICAL WORKFLOW REQUIREMENTS FOR THIS PROJECT
 
-## Issue Tracking with Beads (bd)
+## Issue Tracking with Beads (br)
 
-**This project uses bd (beads) for issue tracking. AI assistants MUST:**
+
+**This project uses br (beads_rust) for issue tracking. AI assistants MUST:**
 
 1. **NEVER start implementation without creating Beads issues first**
-2. **Create all required issues using `bd create` before any coding**
+2. **Create all required issues using `br create` before any coding**
 3. **Use `--depends-on` flags to establish dependency chains**
 4. **Record issue IDs for use in commit messages**
 5. **Complete issues in dependency order**
@@ -119,7 +122,7 @@ When asking for plans, include this requirement:
 YOUR PLAN MUST INCLUDE:
 
 Step 0: Beads Issue Creation (MANDATORY - MUST COME FIRST)
-- List all Beads `bd create` commands that must run
+- List all Beads `br create` commands that must run
 - Show the dependency chain (issue-id → issue-id)
 - Explain why each issue is necessary
 - Do NOT include any implementation steps until issues are created
@@ -154,27 +157,29 @@ Use this structure for issue-dependent projects:
 ```markdown
 ## PHASE 0: Beads Issue Setup (PREREQUISITE - MANDATORY)
 
+
 **This MUST complete before any other work begins.**
 
 ### Required Beads Issues
+
 
 Create these issues in order:
 
 1. **Issue 3.5.1: Design System Setup**
    ```bash
-   bd create "Implement Ozhiaki design system with CSS variables and typography" -p 1 --json
+   br create "Implement Ozhiaki design system with CSS variables and typography" -p 1 --json
    ```
    - Dependencies: None (root issue)
    - Timeline: 1 hour
-   - Closes with: `bd update [issue-id] --status done --json`
+   - Closes with: `br update [issue-id] --status done --json`
 
 2. **Issue 3.5.2: Drag-and-Drop Hook Implementation**
    ```bash
-   bd create "Implement robust drag-and-drop system with visual feedback" -p 1 --depends-on [3.5.1-id] --json
+   br create "Implement robust drag-and-drop system with visual feedback" -p 1 --depends-on [3.5.1-id] --json
    ```
    - Dependencies: 3.5.1
    - Timeline: 2 hours
-   - Closes with: `bd update [issue-id] --status done --json`
+   - Closes with: `br update [issue-id] --status done --json`
 
 [... etc for each issue ...]
 
@@ -191,11 +196,11 @@ Create these issues in order:
 
 **Always Check For:**
 
-1. **Is this project using bd/beads for issue tracking?**
-   - Search CLAUDE.md for "beads", "bd", "issue tracking"
+1. **Is this project using br/beads for issue tracking?**
+   - Search CLAUDE.md for "beads", "br", "issue tracking"
    - If yes → Issues must come first
 
-2. **Are there explicit `bd create` commands in the specs?**
+2. **Are there explicit `br create` commands in the specs?**
    - If yes → These are MANDATORY prerequisites
    - Not optional → Not reference material → Not "nice to have"
 
@@ -211,8 +216,10 @@ Create these issues in order:
 
 ### Planning Methodology for Beads-Tracked Projects
 
+**Note:** `br` is non-invasive and never executes git commands. After `br sync --flush-only`, you must manually run `git add .beads/ && git commit`.
+
 **Step 1: Identify all issues to create**
-- Parse the spec for `bd create` commands
+- Parse the spec for `br create` commands
 - List them in order of dependencies
 - Document the dependency chain
 
@@ -255,7 +262,7 @@ If you encounter this in future work on this project, remember:
 - `@/openspec/AGENTS.md` - Contains detailed spec workflows
 - Any phase spec file ending in `.md` - May contain Beads task structures
 
-Always read CLAUDE.md first. Always search for `bd create` commands. Always respect CAPS warnings.
+Always read CLAUDE.md first. Always search for `br create` commands. Always respect CAPS warnings.
 
 ---
 
